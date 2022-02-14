@@ -20,4 +20,11 @@ describe Tictactoe do
     expect(result).to eq(["O", "", "", "", "", "", "", "", ""])
   end
 
+  it "Player wins by drawing 3 crosses in top row" do
+    @tictactoe.player_adds_cross(1)
+    @tictactoe.player_adds_cross(2)
+    result = @tictactoe.player_adds_cross(3)
+    expect(result).to eq("Game over, Player 1 wins!")
+  end
+
 end
