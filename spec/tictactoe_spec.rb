@@ -11,7 +11,7 @@ describe Tictactoe do
   end
 
   it "starts a new game and player adds X to top left corner" do
-    result = @tictactoe.player_adds_cross
+    result = @tictactoe.player_adds_cross(1)
     expect(result).to eq(["X", "", "", "", "", "", "", "", ""])
   end
 

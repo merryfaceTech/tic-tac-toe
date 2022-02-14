@@ -8,8 +8,8 @@ class Tictactoe
     @rows
   end
 
-  # def turn(selected_square)
-  #   @rows[selected_square + 1] = "X"
-  #   @rows
-  # end
+  def player_adds_cross(selected_square)
+    @rows[selected_square - 1] = "X"
+    @rows
+  end
 end
