@@ -15,4 +15,9 @@ describe Tictactoe do
     expect(result).to eq(["X", "", "", "", "", "", "", "", ""])
   end
 
+  it "starts a new game and player adds naught to top left corner" do
+    result = @tictactoe.player_adds_naught(1)
+    expect(result).to eq(["O", "", "", "", "", "", "", "", ""])
+  end
+
 end
