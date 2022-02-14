@@ -63,4 +63,14 @@ describe Tictactoe do
     ])
   end
 
+  # Test 7
+  it "starts a new game and player adds X to the middle square" do
+    result = @tictactoe.player_adds_cross(5)
+    expect(result).to eq([
+      ["", "", ""],
+      ["", "X", ""],
+      ["", "", ""]
+    ])
+  end
+
 end

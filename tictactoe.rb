@@ -23,19 +23,26 @@ class Tictactoe
     if selected_square <= 3
       @row1[selected_square - 1] = symbol
       @rows[0] = @row1
-    elsif selected_square >= 3 && selected_square <= 6
-      @row2[selected_square - 1] = symbol
+    elsif selected_square > 3 && selected_square <= 6
+      @row2[selected_square - 4] = symbol
       @rows[1] = @row2
     else
-      @row3[selected_square - 1] = symbol
+      @row3[selected_square - 7] = symbol
       @rows[2] = @row3
     end
   end
   
-  def square_checker(row_no)
-    if row_no[0] == row_no[1] && row_no[1] == row_no[2]
-      # puts "Game over, Player 1 wins!"
-      row_no[0] == "X" ? "Game over, Player 1 wins!" : "Game over, AI wins!"
+  def game_end_checker(is_player)
+    player = is_player ? "X" : "O"
+    winning_row = [player, player, player]
+    row_no = @row1
+
+    if @row1 == winning_row
+      return is_player ? "Game over, Player 1 wins!" : "Game over, AI wins!"
+    elsif @row2 == winning_row
+      return is_player ? "Game over, Player 1 wins!" : "Game over, AI wins!"
+    elsif @row3 == winning_row
+      return is_player ? "Game over, Player 1 wins!" : "Game over, AI wins!"
     else
       @rows
     end
@@ -43,12 +50,12 @@ class Tictactoe
 
   def player_adds_cross(selected_square)
     set_square(selected_square, "X")
-    square_checker(@row1)
+    game_end_checker(true)
   end
 
   def player_adds_naught(selected_square)
     set_square(selected_square, "O")
-    square_checker(@row1)
+    game_end_checker(false)
   end
 
 end
