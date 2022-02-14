@@ -35,14 +35,10 @@ class Tictactoe
   def game_end_checker(is_player)
     player = is_player ? "X" : "O"
     winning_row = [player, player, player]
-    row_no = @row1
+    endgame_message = is_player ? "Game over, Player 1 wins!" : "Game over, AI wins!"
 
-    if @row1 == winning_row
-      return is_player ? "Game over, Player 1 wins!" : "Game over, AI wins!"
-    elsif @row2 == winning_row
-      return is_player ? "Game over, Player 1 wins!" : "Game over, AI wins!"
-    elsif @row3 == winning_row
-      return is_player ? "Game over, Player 1 wins!" : "Game over, AI wins!"
+    if @row1 == winning_row || @row2 == winning_row || @row3 == winning_row
+      endgame_message
     else
       @rows
     end
