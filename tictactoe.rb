@@ -31,13 +31,25 @@ class Tictactoe
       @rows[2] = @row3
     end
   end
+
+  def column_checker
+    square_is_not_empty = @row1[0] == "X" || @row1[0] == "O" 
+    column1_win = @row1[0] == @row2[0] && @row1[0] == @row3[0] && square_is_not_empty
+    column2_win = @row1[1] == @row2[1] && @row1[1] == @row3[1] && square_is_not_empty
+    column3_win = @row1[2] == @row2[2] && @row1[2] == @row3[2] && square_is_not_empty
+    c = column1_win || column2_win || column3_win
+    puts column2_win
+    # puts c
+  end
   
   def game_end_checker(is_player)
     player = is_player ? "X" : "O"
     winning_row = [player, player, player]
     endgame_message = is_player ? "Game over, Player wins!" : "Game over, AI wins!"
+    win_by_row = @row1 == winning_row || @row2 == winning_row || @row3 == winning_row
+    win_by_column = column_checker()
 
-    if @row1 == winning_row || @row2 == winning_row || @row3 == winning_row
+    if win_by_row || win_by_column
       endgame_message
     else
       @rows
