@@ -40,7 +40,7 @@ describe Tictactoe do
     @tictactoe.player_adds_cross(1)
     @tictactoe.player_adds_cross(2)
     result = @tictactoe.player_adds_cross(3)
-    expect(result).to eq("Game over, Player 1 wins!")
+    expect(result).to eq("Game over, Player wins!")
   end
 
   # Test 5
@@ -71,6 +71,22 @@ describe Tictactoe do
       ["", "X", ""],
       ["", "", ""]
     ])
+  end
+
+  # Test 8
+  it "AI wins by drawing 3 naughts in last row" do
+    @tictactoe.player_adds_naught(7)
+    @tictactoe.player_adds_naught(8)
+    result = @tictactoe.player_adds_naught(9)
+    expect(result).to eq("Game over, AI wins!")
+  end
+
+  # Test 9
+  it "Player wins by drawing 3 crosses in the left column" do
+    @tictactoe.player_adds_cross(1)
+    @tictactoe.player_adds_cross(4)
+    result = @tictactoe.player_adds_cross(7)
+    expect(result).to eq("Game over, Player wins!")
   end
 
 end
