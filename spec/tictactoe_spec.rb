@@ -48,7 +48,19 @@ describe Tictactoe do
     @tictactoe.player_adds_naught(1)
     @tictactoe.player_adds_naught(2)
     result = @tictactoe.player_adds_naught(3)
-    expect(result).to eq("Game over, Player 2 wins!")
+    expect(result).to eq("Game over, AI wins!")
+  end
+
+  # Test 6
+  it "Both players add to the grid XOX" do
+    @tictactoe.player_adds_cross(1)
+    @tictactoe.player_adds_naught(2)
+    result = @tictactoe.player_adds_cross(3)
+    expect(result).to eq([
+      ["X", "O", "X"],
+      ["", "", ""],
+      ["", "", ""]
+    ])
   end
 
 end

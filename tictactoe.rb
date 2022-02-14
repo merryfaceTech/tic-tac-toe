@@ -35,7 +35,7 @@ class Tictactoe
   def square_checker(row_no)
     if row_no[0] == row_no[1] && row_no[1] == row_no[2]
       # puts "Game over, Player 1 wins!"
-      row_no[0] == "X" ? "Game over, Player 1 wins!" : "Game over, Player 2 wins!"
+      row_no[0] == "X" ? "Game over, Player 1 wins!" : "Game over, AI wins!"
     else
       @rows
     end
