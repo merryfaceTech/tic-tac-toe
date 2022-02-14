@@ -12,4 +12,10 @@ class Tictactoe
     @rows[selected_square - 1] = "X"
     @rows
   end
+
+  def player_adds_naught(selected_square)
+    @rows[selected_square - 1] = "O"
+    @rows
+  end
+
 end
