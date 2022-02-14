@@ -43,4 +43,12 @@ describe Tictactoe do
     expect(result).to eq("Game over, Player 1 wins!")
   end
 
+  # Test 5
+  it "Player wins by drawing 3 naughts in top row" do
+    @tictactoe.player_adds_naught(1)
+    @tictactoe.player_adds_naught(2)
+    result = @tictactoe.player_adds_naught(3)
+    expect(result).to eq("Game over, Player 2 wins!")
+  end
+
 end
