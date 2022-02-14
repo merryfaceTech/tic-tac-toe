@@ -32,26 +32,23 @@ class Tictactoe
     end
   end
   
-  def player_adds_cross(selected_square)
-    set_square(selected_square, "X")
-
-    if @row1[0] == @row1[1] && @row1[1] == @row1[2]
+  def square_checker(row_no)
+    if row_no[0] == row_no[1] && row_no[1] == row_no[2]
       # puts "Game over, Player 1 wins!"
-      return "Game over, Player 1 wins!"
+      row_no[0] == "X" ? "Game over, Player 1 wins!" : "Game over, Player 2 wins!"
     else
       @rows
     end
   end
 
+  def player_adds_cross(selected_square)
+    set_square(selected_square, "X")
+    square_checker(@row1)
+  end
+
   def player_adds_naught(selected_square)
     set_square(selected_square, "O")
-
-    if @row1[0] == @row1[1] && @row1[1] == @row1[2]
-      # puts "Game over, Player 2 wins!"
-      return "Game over, Player 2 wins!"
-    else
-      @rows
-    end
+    square_checker(@row1)
   end
 
 end
