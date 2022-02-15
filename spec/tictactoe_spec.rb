@@ -108,4 +108,12 @@ describe Tictactoe do
       expect(result).to eq(ai_wins)
     end
 
+    # Test 11
+    it "AI wins by drawing 3 naughts left-to-right diagonally" do
+      @tictactoe.ai_adds_naught(1)
+      @tictactoe.ai_adds_naught(5)
+      result = @tictactoe.ai_adds_naught(9)
+      expect(result).to eq(ai_wins)
+    end
+
 end
