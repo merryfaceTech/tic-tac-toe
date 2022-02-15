@@ -92,12 +92,20 @@ describe Tictactoe do
     expect(result).to eq(player_wins)
   end
 
-    # # Test 10
-    # it "AI wins by drawing 3 naughts in the middle column" do
-    #   @tictactoe.ai_adds_naught(2)
-    #   @tictactoe.ai_adds_naught(5)
-    #   result = @tictactoe.ai_adds_naught(8)
-    #   expect(result).to eq(ai_wins)
-    # end
+    # Test 10
+    it "AI wins by drawing 3 naughts in the middle column" do
+      @tictactoe.ai_adds_naught(2)
+      @tictactoe.ai_adds_naught(5)
+      result = @tictactoe.ai_adds_naught(8)
+      expect(result).to eq(ai_wins)
+    end
+
+    # Test 11
+    it "AI wins by drawing 3 naughts in the last column" do
+      @tictactoe.ai_adds_naught(3)
+      @tictactoe.ai_adds_naught(6)
+      result = @tictactoe.ai_adds_naught(9)
+      expect(result).to eq(ai_wins)
+    end
 
 end

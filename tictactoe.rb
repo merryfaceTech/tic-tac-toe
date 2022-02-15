@@ -37,8 +37,8 @@ class Tictactoe
 
   def column_checker
     col1_is_not_empty = @row1[0] == "X" || @row1[0] == "O"
-    col2_is_not_empty = @row2[0] == "X" || @row2[0] == "O" 
-    col3_is_not_empty = @row3[0] == "X" || @row3[0] == "O" 
+    col2_is_not_empty = @row2[1] == "X" || @row2[1] == "O" 
+    col3_is_not_empty = @row3[2] == "X" || @row3[2] == "O" 
     column1_win = @row1[0] == @row2[0] && @row1[0] == @row3[0] && col1_is_not_empty
     column2_win = @row1[1] == @row2[1] && @row1[1] == @row3[1] && col2_is_not_empty
     column3_win = @row1[2] == @row2[2] && @row1[2] == @row3[2] && col3_is_not_empty
