@@ -1,4 +1,4 @@
-require_relative "../tictactoe"
+require_relative "../utils/tictactoe"
 
 describe Tictactoe do
   before(:each) do

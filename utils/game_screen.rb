@@ -1,0 +1,2 @@
+class Game_screen
+end
