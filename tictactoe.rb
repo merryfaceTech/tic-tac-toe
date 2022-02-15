@@ -64,7 +64,7 @@ class Tictactoe
     game_end_checker(true)
   end
 
-  def player_adds_naught(selected_square)
+  def ai_adds_naught(selected_square)
     set_square(selected_square, "O")
     game_end_checker(false)
   end
