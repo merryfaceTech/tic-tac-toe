@@ -44,6 +44,14 @@ class Tictactoe
     column3_win = @row1[2] == @row2[2] && @row1[2] == @row3[2] && col3_is_not_empty
     column1_win || column2_win || column3_win
   end
+
+  def diagonal_checker
+    if @row2[1]
+      if @row1[0] == @row3[2] && @row1[0] == @row2[1]
+        true
+      end
+    end
+  end
   
   def game_end_checker(is_player)
     player = is_player ? "X" : "O"
@@ -51,8 +59,9 @@ class Tictactoe
     endgame_message = is_player ? "Game over, Player wins!" : "Game over, AI wins!"
     win_by_row = @row1 == winning_row || @row2 == winning_row || @row3 == winning_row
     win_by_column = column_checker()
+    win_by_diagonal = diagonal_checker()
 
-    if win_by_row || win_by_column
+    if win_by_row || win_by_column || win_by_diagonal
       endgame_message
     else
       @rows
@@ -70,4 +79,3 @@ class Tictactoe
   end
 
 end
-#commit
