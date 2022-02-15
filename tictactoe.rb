@@ -46,8 +46,11 @@ class Tictactoe
   end
 
   def diagonal_checker
-    if @row2[1]
-      if @row1[0] == @row3[2] && @row1[0] == @row2[1]
+    left_diagonal_win = @row1[0] == @row3[2] && @row1[0] == @row2[1]
+    right_diagonal_win = @row1[2] == @row3[0] && @row1[2] == @row2[1]
+    
+    if @row2[1] != ""
+      if left_diagonal_win || right_diagonal_win
         true
       end
     end
