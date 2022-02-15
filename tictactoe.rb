@@ -11,10 +11,13 @@ class Tictactoe
   end
 
   def start_new_game
+    @row1=["", "", ""]
+    @row2=["", "", ""]
+    @row3=["", "", ""]
     @rows = [
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""]
+      @row1,
+      @row2,
+      @row3
     ]
     @rows
   end
@@ -33,13 +36,13 @@ class Tictactoe
   end
 
   def column_checker
-    square_is_not_empty = @row1[0] == "X" || @row1[0] == "O" 
-    column1_win = @row1[0] == @row2[0] && @row1[0] == @row3[0] && square_is_not_empty
-    column2_win = @row1[1] == @row2[1] && @row1[1] == @row3[1] && square_is_not_empty
-    column3_win = @row1[2] == @row2[2] && @row1[2] == @row3[2] && square_is_not_empty
-    c = column1_win || column2_win || column3_win
-    puts column2_win
-    # puts c
+    col1_is_not_empty = @row1[0] == "X" || @row1[0] == "O"
+    col2_is_not_empty = @row2[0] == "X" || @row2[0] == "O" 
+    col3_is_not_empty = @row3[0] == "X" || @row3[0] == "O" 
+    column1_win = @row1[0] == @row2[0] && @row1[0] == @row3[0] && col1_is_not_empty
+    column2_win = @row1[1] == @row2[1] && @row1[1] == @row3[1] && col2_is_not_empty
+    column3_win = @row1[2] == @row2[2] && @row1[2] == @row3[2] && col3_is_not_empty
+    column1_win || column2_win || column3_win
   end
   
   def game_end_checker(is_player)
@@ -67,3 +70,4 @@ class Tictactoe
   end
 
 end
+#commit
