@@ -19,10 +19,19 @@ describe Game_screen do
     expect(grid).to eq(top_left_corner)
   end
 
-    # Test 2
-    it "AI makes first choice, displays updated grid" do
-      middle_box = " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   "
-      grid = game_ui.ai_chooses_square
-      expect(grid).to eq(middle_box)
-    end
+  # Test 3
+  it "AI makes first choice, displays updated grid" do
+    middle_box = " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   "
+    grid = game_ui.ai_chooses_square
+    expect(grid).to eq(middle_box)
+  end
+
+  # Test 4
+  it "Player wins, displays updated grid" do
+    winning_grid = " X | X | X \n-----------\n   | O |   \n-----------\n   |   |   "
+    player_win_message = "Game over, Player wins!"
+    game_ui.player_chooses_square
+    grid = game_ui.player_chooses_square
+    expect(grid).to eq(winning_grid + "\n \n " + player_win_message)
+  end
 end
