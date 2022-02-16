@@ -9,10 +9,10 @@ class Game_screen
 
     def round1
         puts "Hey, welcome to TIC-TAC-TOE. Please enter the square you would like to use!"
-        choice1 = gets.chomp
+        choice1 = gets.chomp.to_i
         if choice1 == 1
-            @row1[0] = "X"
-            grid_r1 = " @row1[0]  |   |   \n-----------   |   |   \n-----------   |   |   "
+            new_rows = tictactoe.set_square(choice1, "X")
+            grid_r1 = " #{@row1[0]}  |   |   \n-----------   |   |   \n-----------   |   |   "
         end
     end
 end
