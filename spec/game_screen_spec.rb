@@ -18,4 +18,11 @@ describe Game_screen do
     grid = game_ui.player_chooses_square
     expect(grid).to eq(top_left_corner)
   end
+
+    # Test 2
+    it "AI makes first choice, displays updated grid" do
+      middle_box = " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   "
+      grid = game_ui.ai_chooses_square
+      expect(grid).to eq(middle_box)
+    end
 end
