@@ -30,4 +30,11 @@ class Game_screen
         @boxes = @TicTactoe.get_rows
         update_grid(true)
     end
+
+    def ai_chooses_square
+        @TicTactoe.ai_adds_naught(5)
+        @boxes = @TicTactoe.get_rows
+        update_grid(true)
+    end
+
 end
