@@ -18,6 +18,7 @@ describe Game_screen do
     expect(grid_r1).to eq(top_left_corner)  
   end
 end
+
 # empty "   "
 # squares = ["   ", "   ", "   "]
 
