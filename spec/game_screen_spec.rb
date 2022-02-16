@@ -1,17 +1,16 @@
 require_relative "../utils/Game_screen"
 
-
 describe Game_screen do
   game = described_class.new
 
   # Test 1
   it "displays an empty grid at round 0" do
-    empty_grid = "   |   |   \n-----------   |   |   \n-----------   |   |   "
+    empty_grid = "   |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
+    puts empty_grid
     grid = game.initiateGame
     expect(grid).to eq(empty_grid)
   end
 end
-
 
 # empty "   "
 # squares = ["   ", "   ", "   "]
