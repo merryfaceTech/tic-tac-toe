@@ -3,18 +3,31 @@ require_relative './Tictactoe'
 class Game_screen
     def initialize
         @TicTactoe = Tictactoe.new
-        puts @TicTactoe.start_new_game
+        @grid = ""
+        @boxes = []
+        @instructional_grid = " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n"
+    end
+
+    def update_grid(show_current_grid)
+        @grid = " #{@boxes[0][0]} | #{@boxes[0][1]} | #{@boxes[0][2]} \n-----------\n #{@boxes[1][0]} | #{@boxes[1][1]} | #{@boxes[1][2]} \n-----------\n #{@boxes[2][0]} | #{@boxes[2][1]} | #{@boxes[2][2]} "
+        if show_current_grid
+            puts "\n \n" + @grid
+        end
+        @grid
     end
 
     def initiateGame
-        square_values = @TicTactoe.start_new_game
-        empty_grid = " #{square_values[0][0]} | #{square_values[0][1]} | #{square_values[0][2]} \n-----------\n #{square_values[1][0]} | #{square_values[1][1]} | #{square_values[1][2]} \n-----------\n #{square_values[2][0]} | #{square_values[2][1]} | #{square_values[2][2]} "
-        puts @TicTactoe.start_new_game
-        empty_grid
+        puts "Hey, welcome to TIC-TAC-TOE.\n \n"
+        puts @instructional_grid
+        @boxes = @TicTactoe.start_new_game
+        update_grid(false)
     end
 
     def player_chooses_square
-        puts "Hey, welcome to TIC-TAC-TOE. Please enter the square you would like to use!"
-        choice1 = gets.chomp.to_i
+        puts "Please enter the square you would like to use! \n \n"
+        choice = gets.chomp.to_i
+        @TicTactoe.player_adds_cross(choice)
+        @boxes = @TicTactoe.get_rows
+        update_grid(true)
     end
 end

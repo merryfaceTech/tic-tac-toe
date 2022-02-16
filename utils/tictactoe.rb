@@ -81,4 +81,7 @@ class Tictactoe
     game_end_checker(false)
   end
 
+  def get_rows
+    @rows
+  end
 end
