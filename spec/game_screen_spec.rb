@@ -13,35 +13,9 @@ describe Game_screen do
   end
 
   # Test 2
-#   it "gets player input to update top left box, displays updated grid" do
-#     top_left_corner = " X |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
-#     puts top_left_corner
-#     grid_r1 = game_ui.round1
-#     expect(grid_r1).to eq(top_left_corner)  
-#   end
-# end
-
-# empty "   "
-# squares = ["   ", "   ", "   "]
-
-# line = squares.join("|")
-
-# player_sees=
-#    | X |
-# -----------      
-# @row2[0] | @row2[1] | @row2[2]
-# -----------   
-#    |   |
-
-
-#    game = [
-#      ["", "", ""],
-#      ["", "", ""],
-#      ["", "", ""]
-#    ]
-
-#    game.each |row| do
-#     row.each |square| do
-#       ui_square[1] = square
-#     end
+  it "gets player input to update top left box, displays updated grid" do
+    top_left_corner = " X |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
+    grid = game_ui.player_chooses_square
+    expect(grid).to eq(top_left_corner)
   end
+end
