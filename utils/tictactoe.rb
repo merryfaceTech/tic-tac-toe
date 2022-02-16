@@ -1,8 +1,8 @@
 class Tictactoe
   def initialize
-    @row1=["", "", ""]
-    @row2=["", "", ""]
-    @row3=["", "", ""]
+    @row1=[" ", " ", " "]
+    @row2=[" ", " ", " "]
+    @row3=[" ", " ", " "]
     @rows = [
       @row1,
       @row2,
@@ -11,9 +11,9 @@ class Tictactoe
   end
 
   def start_new_game
-    @row1=["", "", ""]
-    @row2=["", "", ""]
-    @row3=["", "", ""]
+    @row1=[" ", " ", " "]
+    @row2=[" ", " ", " "]
+    @row3=[" ", " ", " "]
     @rows = [
       @row1,
       @row2,
@@ -49,7 +49,7 @@ class Tictactoe
     left_diagonal_win = @row1[0] == @row3[2] && @row1[0] == @row2[1]
     right_diagonal_win = @row1[2] == @row3[0] && @row1[2] == @row2[1]
     
-    if @row2[1] != ""
+    if @row2[1] != " "
       if left_diagonal_win || right_diagonal_win
         true
       end

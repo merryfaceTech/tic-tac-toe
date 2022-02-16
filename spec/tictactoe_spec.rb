@@ -12,9 +12,9 @@ describe Tictactoe do
   it "start new game with an empty board in the beginning of the game" do
     result = @tictactoe.start_new_game
     expect(result).to eq([
-      ["", "", ""],
-      ["", "", ""],
-      ["", "", ""]
+      [" ", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
     ])
   end
 
@@ -22,19 +22,19 @@ describe Tictactoe do
   it "starts a new game and player adds X to top left corner" do
     result = @tictactoe.player_adds_cross(1)
     expect(result).to eq([
-      ["X", "", ""],
-      ["", "", ""],
-      ["", "", ""]
+      ["X", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
     ])
   end
 
   # Test 3
-  it "starts a new game and player adds naught to top left corner" do
+  it "starts a new game and ai adds naught to top left corner" do
     result = @tictactoe.ai_adds_naught(1)
     expect(result).to eq([
-      ["O", "", ""],
-      ["", "", ""],
-      ["", "", ""]
+      ["O", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
     ])
   end
 
@@ -61,8 +61,8 @@ describe Tictactoe do
     result = @tictactoe.player_adds_cross(3)
     expect(result).to eq([
       ["X", "O", "X"],
-      ["", "", ""],
-      ["", "", ""]
+      [" ", " ", " "],
+      [" ", " ", " "]
     ])
   end
 
@@ -70,9 +70,9 @@ describe Tictactoe do
   it "starts a new game and player adds X to the middle square" do
     result = @tictactoe.player_adds_cross(5)
     expect(result).to eq([
-      ["", "", ""],
-      ["", "X", ""],
-      ["", "", ""]
+      [" ", " ", " "],
+      [" ", "X", " "],
+      [" ", " ", " "]
     ])
   end
 
