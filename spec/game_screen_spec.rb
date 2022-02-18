@@ -24,8 +24,8 @@ describe Game_screen do
   it "AI makes first choice, displays updated grid" do
     middle_box = "\n \n" + " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   \n"
     # grid = game_ui.ai_chooses_square
-    grid2 = lambda { game_ui.ai_chooses_square }
-    expect{ grid2.call }.to output(middle_box).to_stdout
+    grid = lambda { game_ui.ai_chooses_square }
+    expect{ grid.call }.to output(middle_box).to_stdout
   end
 
   # Test 4
