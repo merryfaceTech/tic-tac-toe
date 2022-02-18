@@ -7,7 +7,7 @@ describe Game_screen do
 
   # Test 1
   it "displays message and grid with numbers at round 0" do
-    empty_grid = "Hey, welcome to TIC-TAC-TOE.\n \n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n"
+    empty_grid = "Hey, welcome to TIC-TAC-TOE." + "\n \n" + " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n"
     # grid = game_ui.initiateGame
     grid = lambda { game_ui.initiateGame }
     expect{ grid.call }.to output(empty_grid).to_stdout
@@ -22,9 +22,10 @@ describe Game_screen do
 
   # Test 3
   it "AI makes first choice, displays updated grid" do
-    middle_box = " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   "
-    grid = game_ui.ai_chooses_square
-    expect{ grid }.to output(middle_box).to_stdout
+    middle_box = "\n \n" + " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   \n"
+    # grid = game_ui.ai_chooses_square
+    grid2 = lambda { game_ui.ai_chooses_square }
+    expect{ grid2.call }.to output(middle_box).to_stdout
   end
 
   # Test 4
