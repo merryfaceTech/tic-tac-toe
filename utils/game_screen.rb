@@ -28,7 +28,7 @@ class Game_screen
         puts "Please enter the square you would like to use! \n \n"
         choice = gets.chomp.to_i
         @TicTactoe.player_adds_cross(choice)
-        end_game_message = "\n \n " + @TicTactoe.game_end_checker(true)
+        end_game_message = @TicTactoe.game_end_checker(true)
         game_has_ended = @TicTactoe.game_end_checker(true).is_a?(String)
         @boxes = @TicTactoe.get_rows     
         update_grid()
