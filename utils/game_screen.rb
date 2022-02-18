@@ -9,7 +9,7 @@ class Game_screen
     end
 
     def update_grid
-        @grid = " #{@boxes[0][0]} | #{@boxes[0][1]} | #{@boxes[0][2]} \n-----------\n #{@boxes[1][0]} | #{@boxes[1][1]} | #{@boxes[1][2]} \n-----------\n #{@boxes[2][0]} | #{@boxes[2][1]} | #{@boxes[2][2]} "
+        @grid = " #{@boxes[0]} | #{@boxes[1]} | #{@boxes[2]} \n-----------\n #{@boxes[3]} | #{@boxes[4]} | #{@boxes[5]} \n-----------\n #{@boxes[6]} | #{@boxes[7]} | #{@boxes[8]} "
     end
 
     def print_grid

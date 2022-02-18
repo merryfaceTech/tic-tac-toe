@@ -1,55 +1,32 @@
 class Tictactoe
   def initialize
-    @row1=[" ", " ", " "]
-    @row2=[" ", " ", " "]
-    @row3=[" ", " ", " "]
-    @rows = [
-      @row1,
-      @row2,
-      @row3
-    ]
+    @score_board = ["", "", "", "", "", "", "", "", ""]
   end
 
   def start_new_game
-    @row1=[" ", " ", " "]
-    @row2=[" ", " ", " "]
-    @row3=[" ", " ", " "]
-    @rows = [
-      @row1,
-      @row2,
-      @row3
-    ]
-    @rows
+    @score_board = ["", "", "", "", "", "", "", "", ""]
+    @score_board
   end
 
   def set_square(selected_square, symbol)
-    if selected_square <= 3
-      @row1[selected_square - 1] = symbol
-      @rows[0] = @row1
-    elsif selected_square > 3 && selected_square <= 6
-      @row2[selected_square - 4] = symbol
-      @rows[1] = @row2
-    else
-      @row3[selected_square - 7] = symbol
-      @rows[2] = @row3
-    end
+      @score_board[selected_square - 1] = symbol
   end
 
   def column_checker
-    col1_is_not_empty = @row1[0] == "X" || @row1[0] == "O"
-    col2_is_not_empty = @row2[1] == "X" || @row2[1] == "O" 
-    col3_is_not_empty = @row3[2] == "X" || @row3[2] == "O" 
-    column1_win = @row1[0] == @row2[0] && @row1[0] == @row3[0] && col1_is_not_empty
-    column2_win = @row1[1] == @row2[1] && @row1[1] == @row3[1] && col2_is_not_empty
-    column3_win = @row1[2] == @row2[2] && @row1[2] == @row3[2] && col3_is_not_empty
+    col1_is_not_empty = @score_board[0] == "X" || @score_board[0] == "O"
+    col2_is_not_empty = @score_board[4] == "X" || @score_board[4] == "O" 
+    col3_is_not_empty = @score_board[8] == "X" || @score_board[8] == "O" 
+    column1_win = @score_board[0] == @score_board[3] && @score_board[0] == @score_board[6] && col1_is_not_empty
+    column2_win = @score_board[1] == @score_board[4] && @score_board[1] == @score_board[7] && col2_is_not_empty
+    column3_win = @score_board[2] == @score_board[5] && @score_board[2] == @score_board[8] && col3_is_not_empty
     column1_win || column2_win || column3_win
   end
 
   def diagonal_checker
-    left_diagonal_win = @row1[0] == @row3[2] && @row1[0] == @row2[1]
-    right_diagonal_win = @row1[2] == @row3[0] && @row1[2] == @row2[1]
+    left_diagonal_win = @score_board[0] == @score_board[8] && @score_board[0] == @score_board[4]
+    right_diagonal_win = @score_board[2] == @score_board[6] && @score_board[2] == @score_board[4]
     
-    if @row2[1] != " "
+    if @score_board[4] != " "
       if left_diagonal_win || right_diagonal_win
         true
       end
@@ -58,16 +35,17 @@ class Tictactoe
   
   def game_end_checker(is_player)
     player = is_player ? "X" : "O"
-    winning_row = [player, player, player]
     endgame_message = is_player ? "Game over, Player wins!" : "Game over, AI wins!"
-    win_by_row = @row1 == winning_row || @row2 == winning_row || @row3 == winning_row
+    win_by_row1 = (@score_board[0] == player) && (@score_board[1] == player) && (@score_board[2] == player)
+    win_by_row2 = (@score_board[3] == player) && (@score_board[4] == player) && (@score_board[5] == player)
+    win_by_row3 = (@score_board[6] == player) && (@score_board[7] == player) && (@score_board[8] == player)
     win_by_column = column_checker()
     win_by_diagonal = diagonal_checker()
 
-    if win_by_row || win_by_column || win_by_diagonal
+    if win_by_row1 || win_by_row2 || win_by_row3 || win_by_column || win_by_diagonal
       endgame_message
     else
-      @rows
+      @score_board
     end
   end
 
@@ -82,6 +60,6 @@ class Tictactoe
   end
 
   def get_rows
-    @rows
+    @score_board
   end
 end
