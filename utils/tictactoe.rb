@@ -1,10 +1,10 @@
 class Tictactoe
   def initialize
-    @score_board = ["", "", "", "", "", "", "", "", ""]
+    @score_board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
   end
 
   def start_new_game
-    @score_board = ["", "", "", "", "", "", "", "", ""]
+    @score_board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
     @score_board
   end
 
