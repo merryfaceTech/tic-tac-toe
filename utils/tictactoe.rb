@@ -55,11 +55,12 @@ class Tictactoe
   end
 
   def ai_adds_naught(selected_square)
-    @score_board.each do |item|
-      if item != "X"
-        set_square(selected_square, "O")
-      end
-    end
+    set_square(selected_square, "O")
+    game_end_checker(false)
+  end
+
+  def unbeatable_ai(selected_square)
+    set_square(selected_square, "O")
     game_end_checker(false)
   end
 
