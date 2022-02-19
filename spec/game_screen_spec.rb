@@ -7,15 +7,16 @@ describe Game_screen do
 
   # Test 1
   it "displays message and grid with numbers at round 0" do
-    empty_grid = "Hey, welcome to TIC-TAC-TOE." + "\n \n" + " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n"
+    empty_grid = a_string_including(" 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n")
     start = game_ui.initiateGame
     grid = lambda { game_ui.initiateGame }
     expect{ grid.call }.to output(empty_grid).to_stdout
+    a_string_including("a")
   end
 
   # Test 2
   it "gets player input to update top left box, displays updated grid" do
-    top_left_corner = " X |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
+    top_left_corner = a_string_including(" X |   |   \n-----------\n   |   |   \n-----------\n   |   |   ")
     choose = game_ui.player_chooses_square
     grid = lambda { game_ui.player_chooses_square }
     expect{ grid.call }.to output(top_left_corner).to_stdout

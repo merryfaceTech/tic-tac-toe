@@ -9,7 +9,7 @@ class Tictactoe
   end
 
   def set_square(selected_square, symbol)
-      @score_board[selected_square - 1] = symbol
+    @score_board[selected_square - 1] = symbol
   end
 
   def column_checker
@@ -55,7 +55,11 @@ class Tictactoe
   end
 
   def ai_adds_naught(selected_square)
-    set_square(selected_square, "O")
+    @score_board.each do |item|
+      if item != "X"
+        set_square(selected_square, "O")
+      end
+    end
     game_end_checker(false)
   end
 

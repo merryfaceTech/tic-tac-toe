@@ -36,12 +36,15 @@ class Game_screen
 
         if game_has_ended
             puts end_game_message
+        else
+            ai_chooses_square()
         end
         
     end
 
     def ai_chooses_square
-        @TicTactoe.ai_adds_naught(5)
+        puts "\n \n The unbeatable AI has chosen! \n \n"
+        @TicTactoe.ai_adds_naught(rand(1..9))
         @boxes = @TicTactoe.get_rows
         update_grid()
         print_grid()
