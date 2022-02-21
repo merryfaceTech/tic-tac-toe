@@ -21,13 +21,23 @@ describe Tictactoe do
 # Test 2
   it "starts a new game and player adds X to top left corner" do
     result = @tictactoe.play_hand(1, "X")
-    expect(result).to eq("X  |   |   " + "\n \n" + "It's the AI's turn.")
+    expect(result).to eq("It's the AI's turn.")
+    expect(@tictactoe.get_rows).to eq([
+      ["X", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 3
   it "starts a new game and ai adds naught to top left corner" do
     result = @tictactoe.play_hand(1, "O")
-    expect(result).to eq("O  |   |   " + "\n \n" + "It's your turn.")
+    expect(result).to eq("It's your turn.")
+    expect(@tictactoe.get_rows).to eq([
+      ["O", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 4
@@ -51,13 +61,23 @@ describe Tictactoe do
     @tictactoe.play_hand(1, "X")
     @tictactoe.play_hand(2, "O")
     result = @tictactoe.play_hand(3, "X")
-    expect(result).to eq("XOX|   |   " + "\n \n" + "It's the AI's turn.")
+    expect(result).to eq("It's the AI's turn.")
+    expect(@tictactoe.get_rows).to eq([
+      ["X", "O", "X"],
+      [" ", " ", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 7
   it "starts a new game and player adds X to the middle square" do
     result = @tictactoe.play_hand(5, "X")
-    expect(result).to eq("   | X |   " + "\n \n" + "It's the AI's turn.")
+    expect(result).to eq("It's the AI's turn.")
+    expect(@tictactoe.get_rows).to eq([
+      [" ", " ", " "],
+      [" ", "X", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 8

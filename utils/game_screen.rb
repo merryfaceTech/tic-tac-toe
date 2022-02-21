@@ -29,7 +29,7 @@ class Game_screen
         puts "\n" + @grid
     end
 
-    def initiateGame
+    def initiate_game
         puts "Hey, welcome to TIC-TAC-TOE."
         puts @instructional_grid
         @boxes = @TicTactoe.start_new_game
@@ -44,6 +44,9 @@ class Game_screen
         @boxes = @TicTactoe.get_rows     
         update_grid()
         print_grid()
+        if @TicTactoe.game_end_checker(true)
+            puts @TicTactoe.game_over(true)
+        end
     end
 
     def ai_chooses_square
@@ -55,3 +58,9 @@ class Game_screen
     end
 
 end
+
+# game = Game_screen.new
+# game.initiate_game
+# game.player_chooses_square
+# game.player_chooses_square
+# game.player_chooses_square

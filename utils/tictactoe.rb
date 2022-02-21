@@ -78,9 +78,8 @@ class Tictactoe
       game_over(is_player)
     else
       # did the player just play a hand? If so, tell them AI is playing, else tell them to play
-      rows_string = @row1.join("") + "|" + @row2.join("") + "|" + @row3.join("")
       turn_message = is_player ? "It's the AI's turn." : "It's your turn."
-      rows_string + "\n \n" + turn_message
+      turn_message
     end
   end
 

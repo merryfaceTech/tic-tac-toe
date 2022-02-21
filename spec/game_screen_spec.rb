@@ -16,7 +16,7 @@ describe Game_screen do
  7 | 8 | 9 
 )
     
-    expect{ game_ui.initiateGame() }.to output(empty_grid).to_stdout
+    expect{ game_ui.initiate_game() }.to output(empty_grid).to_stdout
   end
 
   # Test 2
@@ -51,17 +51,18 @@ describe Game_screen do
   # Test 4
   it "Player wins, displays updated grid" do
     winning_grid =
-%Q(
- X | X | X  
+%Q(Please enter the square you would like to use!
+
+ X | X | X
 -----------
    | O |   
 -----------
    |   |   
+Game over, Player wins!
 )
-    player_win_message = "Game over, Player wins!"
     allow(game_ui).to receive(:gets).and_return("2")
     game_ui.player_chooses_square
     allow(game_ui).to receive(:gets).and_return("3")
-    expect{ game_ui.player_chooses_square }.to output(winning_grid + "\n \n " + player_win_message).to_stdout
+    expect{ game_ui.player_chooses_square }.to output(winning_grid).to_stdout
   end
 end
