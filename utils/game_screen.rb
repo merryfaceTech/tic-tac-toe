@@ -49,12 +49,14 @@ class Game_screen
         end
     end
 
-    def ai_chooses_square
-        @TicTactoe.play_hand(5, "O")
+    def ai_chooses_square(selected_square)
+        @TicTactoe.play_hand(selected_square, "O")
         @boxes = @TicTactoe.get_rows
         update_grid()
         print_grid()
-        @grid
+        if @TicTactoe.game_end_checker(false)
+            puts @TicTactoe.game_over(false)
+        end
     end
 
 end

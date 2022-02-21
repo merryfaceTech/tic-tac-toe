@@ -1,9 +1,7 @@
 require_relative '../utils/Game_screen'
-require_relative '../utils/TicTactoe'
 
 describe Game_screen do
   game_ui = described_class.new
-  game_logic = Tictactoe.new
 
   # Test 1
   it "displays the greeting and the instructional grid at round 0" do
@@ -45,7 +43,7 @@ describe Game_screen do
    |   |   
 )
     allow(game_ui).to receive(:gets).and_return("1")
-    expect{ game_ui.ai_chooses_square }.to output(middle_box).to_stdout
+    expect{ game_ui.ai_chooses_square(5) }.to output(middle_box).to_stdout
   end
 
   # Test 4
@@ -53,16 +51,46 @@ describe Game_screen do
     winning_grid =
 %Q(Please enter the square you would like to use!
 
- X | X | X
+ X | X | X 
 -----------
-   | O |   
+   | O | O 
 -----------
    |   |   
 Game over, Player wins!
 )
     allow(game_ui).to receive(:gets).and_return("2")
     game_ui.player_chooses_square
+    game_ui.ai_chooses_square(6)
     allow(game_ui).to receive(:gets).and_return("3")
     expect{ game_ui.player_chooses_square }.to output(winning_grid).to_stdout
+  end
+end
+# ====================================================================
+
+describe Game_screen do
+  game_ui = described_class.new
+
+  it 'AI wins a game' do
+    winning_grid =
+%Q(
+ X | X | O 
+-----------
+ X | O | O 
+-----------
+   | X | O 
+Game over, AI wins!
+)
+    allow(game_ui).to receive(:gets).and_return("1")
+    game_ui.player_chooses_square
+    game_ui.ai_chooses_square(5)
+    allow(game_ui).to receive(:gets).and_return("2")
+    game_ui.player_chooses_square
+    game_ui.ai_chooses_square(3)
+    allow(game_ui).to receive(:gets).and_return("4")
+    game_ui.player_chooses_square
+    game_ui.ai_chooses_square(6)
+    allow(game_ui).to receive(:gets).and_return("8")
+    game_ui.player_chooses_square
+    expect{ game_ui.ai_chooses_square(9)}.to output(winning_grid).to_stdout
   end
 end
