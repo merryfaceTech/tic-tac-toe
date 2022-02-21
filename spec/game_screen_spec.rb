@@ -22,7 +22,6 @@ describe Game_screen do
   # Test 2
   it "gets player input to update top left box, displays updated grid" do
     message = "Please enter the square you would like to use!" + "\n"
-    # top_left_corner = "\n X |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
     top_left_corner =
 %Q(
  X |   |   
@@ -37,9 +36,17 @@ describe Game_screen do
 
   # Test 3
   it "AI makes first choice, displays updated grid" do
-    middle_box = " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   "
-    grid = game_ui.ai_chooses_square
-    expect{ grid }.to output(middle_box).to_stdout
+    # middle_box = " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   "
+    middle_box=
+%Q(
+ X |   |   
+-----------
+   | O |   
+-----------
+   |   |   
+)
+    allow(game_ui).to receive(:gets).and_return("1")
+    expect{ game_ui.ai_chooses_square }.to output(middle_box).to_stdout
   end
 
   # Test 4
