@@ -7,16 +7,32 @@ describe Game_screen do
 
   # Test 1
   it "displays the greeting and the instructional grid at round 0" do
-    empty_grid = "Hey, welcome to TIC-TAC-TOE.\n \n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n"
+    empty_grid = 
+%Q(Hey, welcome to TIC-TAC-TOE.
+ 1 | 2 | 3 
+-----------
+ 4 | 5 | 6 
+-----------
+ 7 | 8 | 9 
+)
+    
     expect{ game_ui.initiateGame() }.to output(empty_grid).to_stdout
   end
 
   # Test 2
   it "gets player input to update top left box, displays updated grid" do
-    top_left_corner = " X |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
-    # allow(@tic).to receive(:gets).and_return("1")
+    message = "Please enter the square you would like to use!" + "\n"
+    # top_left_corner = "\n X |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
+    top_left_corner =
+%Q(
+ X |   |   
+-----------
+   |   |   
+-----------
+   |   |   
+)
     allow(game_ui).to receive(:gets).and_return("1")
-    expect{ game_ui.player_chooses_square }.to output(top_left_corner).to_stdout
+    expect{ game_ui.player_chooses_square }.to output(message + top_left_corner).to_stdout
   end
 
   # Test 3
