@@ -22,15 +22,15 @@ class Tictactoe
     @rows
   end
 
-  def set_square(selected_square, symbol)
-    if selected_square <= 3
-      @row1[selected_square - 1] = symbol
+  def set_box(selected_box, symbol)
+    if selected_box <= 3
+      @row1[selected_box - 1] = symbol
       @rows[0] = @row1
-    elsif selected_square > 3 && selected_square <= 6
-      @row2[selected_square - 4] = symbol
+    elsif selected_box > 3 && selected_box <= 6
+      @row2[selected_box - 4] = symbol
       @rows[1] = @row2
     else
-      @row3[selected_square - 7] = symbol
+      @row3[selected_box - 7] = symbol
       @rows[2] = @row3
     end
   end
@@ -71,16 +71,11 @@ class Tictactoe
     end
   end
 
-  def player_adds_cross(selected_square)
-    set_square(selected_square, "X")
-    game_end_checker(true)
+  def play_hand(selected_box, symbol)
+    set_box(selected_box, symbol)
+    game_end_checker(symbol == "X")
   end
-
-  def ai_adds_naught(selected_square)
-    set_square(selected_square, "O")
-    game_end_checker(false)
-  end
-
+ 
   def get_rows
     @rows
   end
