@@ -55,28 +55,37 @@ class Tictactoe
       end
     end
   end
-  
+
   def game_end_checker(is_player)
     player = is_player ? "X" : "O"
     winning_row = [player, player, player]
-    endgame_message = is_player ? "Game over, Player wins!" : "Game over, AI wins!"
     win_by_row = @row1 == winning_row || @row2 == winning_row || @row3 == winning_row
     win_by_column = column_checker()
     win_by_diagonal = diagonal_checker()
-
-    if win_by_row || win_by_column || win_by_diagonal
-      endgame_message
-    else
-      @rows
-    end
+    
+    win_by_row || win_by_column || win_by_diagonal
+  end
+  
+  def game_over(is_player)
+    is_player ? "Game over, Player wins!" : "Game over, AI wins!"
   end
 
   def play_hand(selected_box, symbol)
+    is_player = symbol == "X"
     set_box(selected_box, symbol)
-    game_end_checker(symbol == "X")
+
+    if game_end_checker(is_player)
+      game_over(is_player)
+    else
+      # did the player just play a hand? If so, tell them AI is playing, else tell them to play
+      rows_string = @row1.join("") + "|" + @row2.join("") + "|" + @row3.join("")
+      turn_message = is_player ? "It's the AI's turn." : "It's your turn."
+      rows_string + "\n \n" + turn_message
+    end
   end
- 
+
   def get_rows
     @rows
   end
 end
+
