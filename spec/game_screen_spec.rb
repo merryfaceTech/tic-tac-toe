@@ -6,16 +6,9 @@ describe Game_screen do
   game_logic = Tictactoe.new
 
   # Test 1
-  it "displays an empty grid at round 0" do
-    empty_grid = "
-       |   |   
-    ------------
-       |   |   
-    ------------
-       |   |    
-    "
-    grid = game_ui.initiateGame
-    expect{ grid }.to output(empty_grid).to_stdout
+  it "displays the greeting and the instructional grid at round 0" do
+    empty_grid = "Hey, welcome to TIC-TAC-TOE.\n \n 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n"
+    expect{ game_ui.initiateGame() }.to output(empty_grid).to_stdout
   end
 
   # Test 2
