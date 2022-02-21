@@ -14,8 +14,9 @@ describe Game_screen do
   # Test 2
   it "gets player input to update top left box, displays updated grid" do
     top_left_corner = " X |   |   \n-----------\n   |   |   \n-----------\n   |   |   "
-    grid = game_ui.player_chooses_square
-    expect{ grid }.to output(top_left_corner).to_stdout
+    # allow(@tic).to receive(:gets).and_return("1")
+    allow(game_ui).to receive(:gets).and_return("1")
+    expect{ game_ui.player_chooses_square }.to output(top_left_corner).to_stdout
   end
 
   # Test 3
