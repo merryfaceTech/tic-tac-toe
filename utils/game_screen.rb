@@ -22,7 +22,6 @@ class Game_screen
 -----------
  #{@boxes[2][0]} | #{@boxes[2][1]} | #{@boxes[2][2]} 
 )
-
     end
 
     def print_grid

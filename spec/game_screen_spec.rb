@@ -64,6 +64,19 @@ Game over, Player wins!
     allow(game_ui).to receive(:gets).and_return("3")
     expect{ game_ui.player_chooses_square }.to output(winning_grid).to_stdout
   end
+
+  # Test 5
+  it "Resets the board" do
+    game_ui.reset_board
+    expect(game_ui.get_rows).to eq([
+      [" ", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
+    ])
+    expect(game_ui.get_grid).to eq("")
+    expect(game_ui.get_boxes).to eq([])
+  end
+
 end
 # ====================================================================
 
