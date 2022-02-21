@@ -36,7 +36,6 @@ describe Game_screen do
 
   # Test 3
   it "AI makes first choice, displays updated grid" do
-    # middle_box = " X |   |   \n-----------\n   | O |   \n-----------\n   |   |   "
     middle_box=
 %Q(
  X |   |   
@@ -51,10 +50,18 @@ describe Game_screen do
 
   # Test 4
   it "Player wins, displays updated grid" do
-    winning_grid = " X | X | X \n-----------\n   | O |   \n-----------\n   |   |   "
+    winning_grid =
+%Q(
+ X | X | X  
+-----------
+   | O |   
+-----------
+   |   |   
+)
     player_win_message = "Game over, Player wins!"
+    allow(game_ui).to receive(:gets).and_return("2")
     game_ui.player_chooses_square
-    grid = game_ui.player_chooses_square
-    expect{ grid }.to output(winning_grid + "\n \n " + player_win_message).to_stdout
+    allow(game_ui).to receive(:gets).and_return("3")
+    expect{ game_ui.player_chooses_square }.to output(winning_grid + "\n \n " + player_win_message).to_stdout
   end
 end
