@@ -77,6 +77,33 @@ Game over, Player wins!
     expect(game_ui.get_boxes).to eq([])
   end
 
+  # Test 6
+  it "checks if all squares are full and no winner" do
+    tie_grid =
+    %Q(
+     X | O | X  
+    -----------
+     O | X | O  
+    -----------
+     X | X | O  
+    Game over, nobody wins!
+    )
+        allow(game_ui).to receive(:gets).and_return("1")
+        game_ui.player_chooses_square
+        game_ui.ai_chooses_square(2)
+        allow(game_ui).to receive(:gets).and_return("3")
+        game_ui.player_chooses_square
+        game_ui.ai_chooses_square(4)
+        allow(game_ui).to receive(:gets).and_return("5")
+        game_ui.player_chooses_square
+        game_ui.ai_chooses_square(6)
+        allow(game_ui).to receive(:gets).and_return("7")
+        game_ui.player_chooses_square
+        game_ui.ai_chooses_square(9)
+        allow(game_ui).to receive(:gets).and_return("8")
+        expect{ game_ui.player_chooses_square}.to output(tie_grid).to_stdout
+  end
+
 end
 # ====================================================================
 
