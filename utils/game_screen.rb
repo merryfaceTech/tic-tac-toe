@@ -2,7 +2,7 @@ require_relative './Tictactoe'
 
 class Game_screen
     def initialize
-        @TicTactoe = Tictactoe.new
+        @Tic = Tictactoe.new
         @grid = ""
         @boxes = []
         @instructional_grid =
@@ -31,7 +31,7 @@ class Game_screen
     def initiate_game
         puts "Hey, welcome to TIC-TAC-TOE."
         puts @instructional_grid
-        @boxes = @TicTactoe.start_new_game
+        @boxes = @Tic.start_new_game
         update_grid()
         @grid
     end
@@ -39,23 +39,41 @@ class Game_screen
     def player_chooses_square
         puts "Please enter the square you would like to use!"
         choice = gets.chomp.to_i
-        @TicTactoe.play_hand(choice, "X")
-        @boxes = @TicTactoe.get_rows     
+        @Tic.play_hand(choice, "X")
+        @boxes = @Tic.get_rows     
         update_grid()
         print_grid()
-        if @TicTactoe.game_end_checker(true)
-            puts @TicTactoe.game_over(true)
+        if @Tic.game_end_checker(true)
+            puts @Tic.game_over(true)
         end
     end
 
     def ai_chooses_square(selected_square)
-        @TicTactoe.play_hand(selected_square, "O")
-        @boxes = @TicTactoe.get_rows
+        @Tic.play_hand(selected_square, "O")
+        @boxes = @Tic.get_rows
         update_grid()
         print_grid()
-        if @TicTactoe.game_end_checker(false)
-            puts @TicTactoe.game_over(false)
+        if @Tic.game_end_checker(false)
+            puts @Tic.game_over(false)
         end
+    end
+
+    def reset_board
+        @Tic.start_new_game
+        @grid = ""
+        @boxes = []
+    end
+
+    def get_rows
+        @Tic.get_rows
+    end
+
+    def get_grid
+        @grid
+    end
+
+    def get_boxes
+        @boxes
     end
 
 end
