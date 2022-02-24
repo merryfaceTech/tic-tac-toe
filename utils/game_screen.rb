@@ -31,12 +31,27 @@ class Game_screen
     end
         
     def ai_chooses_square
+        UNBEATABLE_HASH = { [1,2] => 3,
+            [2,3] => 1,
+            [5,6] => 4,
+            [4,5] => 6,
+            [8,9] => 7,
+            [7,8] => 9,
+            [1,4] => 7,
+            [4,7] => 1,
+            [2,5] => 8,
+            [5,8] => 2,
+            [3,6] => 9,
+            [6,9] => 3,
+            [1,5] => 9,
+            [5,9] => 1,
+            [3,5] => 7,
+            [7,5] => 3,
+          }
         if @boxes_chosen_by_player.length == 0
             selected_square = 5
         elsif @boxes_chosen_by_player.include?([1, 2])
             selected_square = 3
-        elsif @boxes_chosen_by_player.include?([2, 3])
-            selected_square = 1
         elsif @boxes_chosen_by_player.include?([4, 5])
             selected_square = 6
         elsif @boxes_chosen_by_player.include?([5, 6])
