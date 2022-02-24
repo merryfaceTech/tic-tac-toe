@@ -31,7 +31,7 @@ class Game_screen
     end
         
     def ai_chooses_square
-        move_dictionary = { [1,2] => 3,
+        @move_dictionary = { [1,2] => 3,
             [2,3] => 1,
             [5,6] => 4,
             [4,5] => 6,
@@ -48,14 +48,18 @@ class Game_screen
             [3,5] => 7,
             [7,5] => 3,
           }
+        
         if @boxes_chosen_by_player.length == 0
             selected_square = 5
-        elsif move_dictionary.each do | choices, stop_player |
-            @boxes_chosen_by_player.include?(choices)
-            selected_square = stop_player
-          end 
-        else selected_square = rand(1..9)
+        elsif @boxes_chosen_by_player.length >= 2
+            @move_dictionary.each do | choices, stop_player |
+                @boxes_chosen_by_player.include?(choices)
+                selected_square = stop_player if selected_square != "X"
+            end
+        else
+            selected_square = rand(1..9) if selected_square != "X"
         end
+
         @TicTactoe.unbeatable_ai(selected_square)
         @boxes = @TicTactoe.get_rows
         update_grid()
