@@ -31,7 +31,7 @@ class Game_screen
     end
         
     def ai_chooses_square
-        UNBEATABLE_HASH = { [1,2] => 3,
+        move_dictionary = { [1,2] => 3,
             [2,3] => 1,
             [5,6] => 4,
             [4,5] => 6,
@@ -50,16 +50,10 @@ class Game_screen
           }
         if @boxes_chosen_by_player.length == 0
             selected_square = 5
-        elsif @boxes_chosen_by_player.include?([1, 2])
-            selected_square = 3
-        elsif @boxes_chosen_by_player.include?([4, 5])
-            selected_square = 6
-        elsif @boxes_chosen_by_player.include?([5, 6])
-            selected_square = 4
-        elsif @boxes_chosen_by_player.include?([7, 8])
-            selected_square = 9
-        elsif @boxes_chosen_by_player.include?([8, 9])
-            selected_square = 7
+        elsif move_dictionary.each do | choices, stop_player |
+            @boxes_chosen_by_player.include?(choices)
+            selected_square = stop_player
+          end 
         else selected_square = rand(1..9)
         end
         @TicTactoe.unbeatable_ai(selected_square)
