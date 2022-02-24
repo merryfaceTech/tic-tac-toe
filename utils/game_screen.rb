@@ -6,7 +6,12 @@ class Game_screen
         @grid = ""
         @boxes = []
         @boxes_chosen_by_player = []
-        @instructional_grid = " 1 | 2 | 3 \n-----------\n 4 | 5 | 6 \n-----------\n 7 | 8 | 9 \n \n"
+        @instructional_grid =
+%Q( 1 | 2 | 3 
+-----------
+ 4 | 5 | 6 
+-----------
+ 7 | 8 | 9 )
     end
 
     def update_grid
@@ -18,35 +23,16 @@ class Game_screen
     end
 
     def initiateGame
-        puts "Hey, welcome to TIC-TAC-TOE.\n \n"
+        puts "This is TIC-TAC-TOE. The unbeatable one chooses first, be wise and leave or choose a box using this numbered grid.\n\n"
         puts @instructional_grid
         @boxes = @TicTactoe.start_new_game
         update_grid()
         @grid
     end
-
-    def player_chooses_square
-        puts "Please enter the square you would like to use! \n \n"
-        choice = gets.chomp.to_i
-        @boxes_chosen_by_player << choice
-        @TicTactoe.player_adds_cross(choice)
-        end_game_message = @TicTactoe.game_end_checker(true)
-        game_has_ended = @TicTactoe.game_end_checker(true).is_a?(String)
-        @boxes = @TicTactoe.get_rows     
-        update_grid()
-        print_grid()
-
-        if game_has_ended
-            puts end_game_message
-        else
-            ai_chooses_square()
-        end
         
-    end
-
     def ai_chooses_square
-        if @boxes_chosen_by_player.length == 1
-            selected_square = rand(1..9)
+        if @boxes_chosen_by_player.length == 0
+            selected_square = 5
         elsif @boxes_chosen_by_player.include?([1, 2])
             selected_square = 3
         elsif @boxes_chosen_by_player.include?([2, 3])
@@ -57,14 +43,34 @@ class Game_screen
             selected_square = 4
         elsif @boxes_chosen_by_player.include?([7, 8])
             selected_square = 9
-        else @boxes_chosen_by_player.include?([8, 9])
+        elsif @boxes_chosen_by_player.include?([8, 9])
             selected_square = 7
+        else selected_square = rand(1..9)
         end
         @TicTactoe.unbeatable_ai(selected_square)
         @boxes = @TicTactoe.get_rows
         update_grid()
         print_grid()
         @grid
+        end_game_message = @TicTactoe.game_end_checker(false)
+        game_has_ended = @TicTactoe.game_end_checker(false).is_a?(String)
+        if game_has_ended
+            puts end_game_message
+            exit 
+        else
+            player_chooses_square()
+        end  
     end
-
+    
+    def player_chooses_square
+        # puts "Please enter the square you would like to use! \n\n"
+        choice = gets.chomp.to_i
+        @boxes_chosen_by_player << choice
+        @TicTactoe.player_adds_cross(choice)
+        @boxes = @TicTactoe.get_rows     
+        update_grid()
+        print_grid()
+        ai_chooses_square()
+    end
+        
 end
