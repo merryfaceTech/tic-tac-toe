@@ -45,6 +45,10 @@ class Game_screen
         print_grid()
         if @Tic.game_end_checker(true)
             puts @Tic.game_over(true)
+        else
+            if !@boxes.flatten.include?(" ")
+                puts "Game over, nobody wins!"
+            end
         end
     end
 

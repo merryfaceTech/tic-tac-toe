@@ -80,24 +80,25 @@ Game over, Player wins!
   # Test 6
   it "checks if all squares are full and no winner" do
     tie_grid =
-    %Q(
-     X | O | X  
-    -----------
-     O | X | O  
-    -----------
-     X | X | O  
-    Game over, nobody wins!
-    )
+    %Q(Please enter the square you would like to use!
+
+ X | O | X 
+-----------
+ X | X | O 
+-----------
+ O | X | O 
+Game over, nobody wins!
+)
         allow(game_ui).to receive(:gets).and_return("1")
         game_ui.player_chooses_square
         game_ui.ai_chooses_square(2)
         allow(game_ui).to receive(:gets).and_return("3")
         game_ui.player_chooses_square
-        game_ui.ai_chooses_square(4)
+        game_ui.ai_chooses_square(7)
         allow(game_ui).to receive(:gets).and_return("5")
         game_ui.player_chooses_square
         game_ui.ai_chooses_square(6)
-        allow(game_ui).to receive(:gets).and_return("7")
+        allow(game_ui).to receive(:gets).and_return("4")
         game_ui.player_chooses_square
         game_ui.ai_chooses_square(9)
         allow(game_ui).to receive(:gets).and_return("8")
@@ -134,3 +135,6 @@ Game over, AI wins!
     expect{ game_ui.ai_chooses_square(9)}.to output(winning_grid).to_stdout
   end
 end
+
+# "Please enter the square you would like to use!\n\n X | O | X \n-----------\n O | X | O \n-----------\n X | X | O \nGame over, nobody wins!\n"
+# "Please enter the square you would like to use!\n\n X | O | X \n-----------\n O | X | O \n-----------\n X | X | O \nGame over, Player wins!\n"

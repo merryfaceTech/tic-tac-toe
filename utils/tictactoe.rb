@@ -8,6 +8,7 @@ class Tictactoe
       @row2,
       @row3
     ]
+    @moves_played = 0
   end
 
   def start_new_game
@@ -19,6 +20,7 @@ class Tictactoe
       @row2,
       @row3
     ]
+    @moves_played = 0
     @rows
   end
 
@@ -65,7 +67,7 @@ class Tictactoe
     
     win_by_row || win_by_column || win_by_diagonal
   end
-  
+
   def game_over(is_player)
     is_player ? "Game over, Player wins!" : "Game over, AI wins!"
   end
@@ -73,9 +75,12 @@ class Tictactoe
   def play_hand(selected_box, symbol)
     is_player = symbol == "X"
     set_box(selected_box, symbol)
+    @moves_played += 1
 
     if game_end_checker(is_player)
       game_over(is_player)
+    elsif game_end_checker(is_player) == false && @moves_played == 9
+      "Game over, nobody wins!"
     else
       # did the player just play a hand? If so, tell them AI is playing, else tell them to play
       turn_message = is_player ? "It's the AI's turn." : "It's your turn."
