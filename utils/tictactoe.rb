@@ -58,18 +58,33 @@ class Tictactoe
     end
   end
 
+  def row_checker()
+    row1_is_not_empty = @row1[0] == "X" || @row1[0] == "O"
+    row2_is_not_empty = @row2[0] == "X" || @row2[0] == "O" 
+    row3_is_not_empty = @row3[0] == "X" || @row3[0] == "O"
+    row1_win = @row1[0] == @row1[1] && @row1[1] == @row1[2] && row1_is_not_empty
+    row2_win = @row2[0] == @row2[1] && @row2[1] == @row2[2] && row2_is_not_empty
+    row3_win = @row3[0] == @row3[1] && @row1[1] == @row3[2] && row3_is_not_empty
+    row1_win || row2_win || row3_win
+  end
+
   def game_end_checker(is_player)
-    player = is_player ? "X" : "O"
-    winning_row = [player, player, player]
-    win_by_row = @row1 == winning_row || @row2 == winning_row || @row3 == winning_row
+    win_by_row = row_checker()
     win_by_column = column_checker()
     win_by_diagonal = diagonal_checker()
+    all_moves_played = @moves_played == 9
     
-    win_by_row || win_by_column || win_by_diagonal
+    win_by_row || win_by_column || win_by_diagonal || all_moves_played
   end
 
   def game_over(is_player)
     is_player ? "Game over, Player wins!" : "Game over, AI wins!"
+  end
+
+  def game_draw
+    if !@rows.flatten.include?(" ")
+      "Game over, nobody wins!"
+    end
   end
 
   def play_hand(selected_box, symbol)
@@ -78,13 +93,13 @@ class Tictactoe
     @moves_played += 1
 
     if game_end_checker(is_player)
-      game_over(is_player)
-    elsif game_end_checker(is_player) == false && @moves_played == 9
-      "Game over, nobody wins!"
-    else
-      # did the player just play a hand? If so, tell them AI is playing, else tell them to play
-      turn_message = is_player ? "It's the AI's turn." : "It's your turn."
-      turn_message
+      if row_checker() || column_checker() || diagonal_checker()
+        game_over(is_player)
+      elsif @moves_played == 9
+        game_draw()
+      else
+        is_player ? "It's the AI's turn" : "It's your turn."
+      end
     end
   end
 
