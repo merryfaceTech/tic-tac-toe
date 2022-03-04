@@ -38,7 +38,8 @@ describe Game_screen do
       "-----------\n" +
       "   | O |   \n" +
       "-----------\n" +
-      "   |   |   \n"
+      "   |   |   \n" +
+      "It's your turn.\n"
 
     allow(game_ui).to receive(:gets).and_return("1")
     expect{ game_ui.ai_chooses_square(5) }.to output(middle_box).to_stdout
