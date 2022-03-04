@@ -6,12 +6,12 @@ describe Game_screen do
   # Test 1
   it "displays the greeting and the instructional grid at round 0" do
     empty_grid = 
-      "Hey, welcome to TIC-TAC-TOE." +
+      "Hey, welcome to TIC-TAC-TOE.\n" +
       " 1 | 2 | 3 \n" +
       "-----------\n" +
       " 4 | 5 | 6 \n" +
       "-----------\n" +
-      " 7 | 8 | 9 "
+      " 7 | 8 | 9 \n"
 
     
     expect{ game_ui.initiate_game() }.to output(empty_grid).to_stdout
@@ -19,16 +19,16 @@ describe Game_screen do
 
   # Test 2
   it "gets player input to update top left box, displays updated grid" do
-    message = "Please enter the square you would like to use!" + "\n"
     top_left_corner =
       " X |   |   \n" +
       "-----------\n" +
       "   |   |   \n" +
       "-----------\n" +
-      "   |   |   "
+      "   |   |   \n" +
+      "It's the AI's turn.\n"
 
     allow(game_ui).to receive(:gets).and_return("1")
-    expect{ game_ui.player_chooses_square }.to output(message + top_left_corner).to_stdout
+    expect{ game_ui.player_chooses_square }.to output(top_left_corner).to_stdout
   end
 
   # Test 3
@@ -38,7 +38,7 @@ describe Game_screen do
       "-----------\n" +
       "   | O |   \n" +
       "-----------\n" +
-      "   |   |   "
+      "   |   |   \n"
 
     allow(game_ui).to receive(:gets).and_return("1")
     expect{ game_ui.ai_chooses_square(5) }.to output(middle_box).to_stdout
@@ -47,13 +47,12 @@ describe Game_screen do
   # Test 4
   it "Player wins, displays updated grid" do
     winning_grid =
-      "Please enter the square you would like to use!\n" +
       " X | X | X \n" +
       "-----------\n" +
       "   | O | O \n" +
       "-----------\n" +
       "   |   |   \n" +
-      "Game over, Player wins!"
+      "Game over, Player wins!\n"
 
     allow(game_ui).to receive(:gets).and_return("2")
     game_ui.player_chooses_square
@@ -84,7 +83,7 @@ describe Game_screen do
       " X | X | O \n" +
       "-----------\n" +
       " O | X | O \n" +
-      "Game over, nobody wins!"
+      "Game over, nobody wins!\n"
 
     allow(game_ui).to receive(:gets).and_return("1")
     game_ui.player_chooses_square
@@ -124,7 +123,7 @@ describe Game_screen do
       " X | O | O \n" +
       "-----------\n" +
       "   | X | O \n" +
-      "Game over, AI wins!"
+      "Game over, AI wins!\n"
 
     allow(game_ui).to receive(:gets).and_return("1")
     game_ui.player_chooses_square

@@ -6,48 +6,41 @@ class Game_screen
         @grid = ""
         @boxes = []
         @instructional_grid =
-%Q( 1 | 2 | 3 
------------
- 4 | 5 | 6 
------------
- 7 | 8 | 9 
-)
+            " 1 | 2 | 3 \n" +
+            "-----------\n" +
+            " 4 | 5 | 6 \n" +
+            "-----------\n" +
+            " 7 | 8 | 9 "
     end
 
     def update_grid
         @grid = 
-%Q( #{@boxes[0][0]} | #{@boxes[0][1]} | #{@boxes[0][2]} 
------------
- #{@boxes[1][0]} | #{@boxes[1][1]} | #{@boxes[1][2]} 
------------
- #{@boxes[2][0]} | #{@boxes[2][1]} | #{@boxes[2][2]} 
-)
+            " #{@boxes[0][0]} | #{@boxes[0][1]} | #{@boxes[0][2]} \n" +
+            "-----------\n" +
+            " #{@boxes[1][0]} | #{@boxes[1][1]} | #{@boxes[1][2]} \n" +
+            "-----------\n" +
+            " #{@boxes[2][0]} | #{@boxes[2][1]} | #{@boxes[2][2]} "
     end
 
     def print_grid
-        puts "\n" + @grid
+        puts @grid
     end
 
     def initiate_game
-        puts "Hey, welcome to TIC-TAC-TOE."
+        puts "Hey, welcome to TIC-TAC-TOE.\n"
         puts @instructional_grid
-        @boxes = @Tic.start_new_game
+        @Tic.start_new_game
+        @boxes = @Tic.get_rows()
         update_grid()
-        @grid
     end
 
     def player_chooses_square
-        puts "Please enter the square you would like to use!"
         choice = gets.chomp.to_i
         @Tic.play_hand(choice, "X")
         @boxes = @Tic.get_rows     
         update_grid()
         print_grid()
-        if @Tic.game_end_checker(true)
-            puts @Tic.game_over(true)
-        else
-            @Tic.game_draw()
-        end
+        puts @Tic.message("X")
     end
 
     def ai_chooses_square(selected_square)
@@ -55,9 +48,7 @@ class Game_screen
         @boxes = @Tic.get_rows
         update_grid()
         print_grid()
-        if @Tic.game_end_checker(false)
-            puts @Tic.game_over(false)
-        end
+        puts @Tic.message("O")
     end
 
     def reset_board
@@ -80,8 +71,8 @@ class Game_screen
 
 end
 
-# game = Game_screen.new
-# game.initiate_game
-# game.player_chooses_square
-# game.player_chooses_square
-# game.player_chooses_square
+# expected
+# " X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \nIt's the AI's turn.\n"
+
+# actual
+# "\n X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \nIt's the AI's turn.\n"

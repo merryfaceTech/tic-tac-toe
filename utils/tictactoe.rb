@@ -89,15 +89,17 @@ class Tictactoe
   end
 
   def play_hand(selected_box, symbol)
-    is_player = symbol == "X"
     set_box(selected_box, symbol)
     @moves_played += 1
-
+  end
+  
+  def message(symbol)
+    is_player = symbol == "X"
     if game_ended()
       if row_checker() || column_checker() || diagonal_checker()
         return game_over(is_player)
       end
-
+  
       if @moves_played == 9
         return game_draw()
       end
