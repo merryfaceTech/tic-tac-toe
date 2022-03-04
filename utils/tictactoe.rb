@@ -9,6 +9,7 @@ class Tictactoe
       @row3
     ]
     @moves_played = 0
+    turn_message = ""
   end
 
   def start_new_game
@@ -64,11 +65,11 @@ class Tictactoe
     row3_is_not_empty = @row3[0] == "X" || @row3[0] == "O"
     row1_win = @row1[0] == @row1[1] && @row1[1] == @row1[2] && row1_is_not_empty
     row2_win = @row2[0] == @row2[1] && @row2[1] == @row2[2] && row2_is_not_empty
-    row3_win = @row3[0] == @row3[1] && @row1[1] == @row3[2] && row3_is_not_empty
+    row3_win = @row3[0] == @row3[1] && @row3[1] == @row3[2] && row3_is_not_empty
     row1_win || row2_win || row3_win
   end
 
-  def game_end_checker(is_player)
+  def game_ended
     win_by_row = row_checker()
     win_by_column = column_checker()
     win_by_diagonal = diagonal_checker()
@@ -92,14 +93,16 @@ class Tictactoe
     set_box(selected_box, symbol)
     @moves_played += 1
 
-    if game_end_checker(is_player)
+    if game_ended()
       if row_checker() || column_checker() || diagonal_checker()
-        game_over(is_player)
-      elsif @moves_played == 9
-        game_draw()
-      else
-        is_player ? "It's the AI's turn" : "It's your turn."
+        return game_over(is_player)
       end
+
+      if @moves_played == 9
+        return game_draw()
+      end
+    else
+      return @turn_message = is_player ? "It's the AI's turn." : "It's your turn."
     end
   end
 

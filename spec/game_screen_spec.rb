@@ -6,13 +6,13 @@ describe Game_screen do
   # Test 1
   it "displays the greeting and the instructional grid at round 0" do
     empty_grid = 
-%Q(Hey, welcome to TIC-TAC-TOE.
- 1 | 2 | 3 
------------
- 4 | 5 | 6 
------------
- 7 | 8 | 9 
-)
+      "Hey, welcome to TIC-TAC-TOE." +
+      " 1 | 2 | 3 \n" +
+      "-----------\n" +
+      " 4 | 5 | 6 \n" +
+      "-----------\n" +
+      " 7 | 8 | 9 "
+
     
     expect{ game_ui.initiate_game() }.to output(empty_grid).to_stdout
   end
@@ -21,13 +21,12 @@ describe Game_screen do
   it "gets player input to update top left box, displays updated grid" do
     message = "Please enter the square you would like to use!" + "\n"
     top_left_corner =
-%Q(
- X |   |   
------------
-   |   |   
------------
-   |   |   
-)
+      " X |   |   \n" +
+      "-----------\n" +
+      "   |   |   \n" +
+      "-----------\n" +
+      "   |   |   "
+
     allow(game_ui).to receive(:gets).and_return("1")
     expect{ game_ui.player_chooses_square }.to output(message + top_left_corner).to_stdout
   end
@@ -35,13 +34,12 @@ describe Game_screen do
   # Test 3
   it "AI makes first choice, displays updated grid" do
     middle_box=
-%Q(
- X |   |   
------------
-   | O |   
------------
-   |   |   
-)
+      " X |   |   \n" +
+      "-----------\n" +
+      "   | O |   \n" +
+      "-----------\n" +
+      "   |   |   "
+
     allow(game_ui).to receive(:gets).and_return("1")
     expect{ game_ui.ai_chooses_square(5) }.to output(middle_box).to_stdout
   end
@@ -49,19 +47,20 @@ describe Game_screen do
   # Test 4
   it "Player wins, displays updated grid" do
     winning_grid =
-%Q(Please enter the square you would like to use!
+      "Please enter the square you would like to use!\n" +
+      " X | X | X \n" +
+      "-----------\n" +
+      "   | O | O \n" +
+      "-----------\n" +
+      "   |   |   \n" +
+      "Game over, Player wins!"
 
- X | X | X 
------------
-   | O | O 
------------
-   |   |   
-Game over, Player wins!
-)
     allow(game_ui).to receive(:gets).and_return("2")
     game_ui.player_chooses_square
+
     game_ui.ai_chooses_square(6)
     allow(game_ui).to receive(:gets).and_return("3")
+
     expect{ game_ui.player_chooses_square }.to output(winning_grid).to_stdout
   end
 
@@ -80,29 +79,36 @@ Game over, Player wins!
   # Test 6
   it "checks if all squares are full and no winner" do
     tie_grid =
-    %Q(Please enter the square you would like to use!
+      " X | O | X \n" +
+      "-----------\n" +
+      " X | X | O \n" +
+      "-----------\n" +
+      " O | X | O \n" +
+      "Game over, nobody wins!"
 
- X | O | X 
------------
- X | X | O 
------------
- O | X | O 
-Game over, nobody wins!
-)
-        allow(game_ui).to receive(:gets).and_return("1")
-        game_ui.player_chooses_square
-        game_ui.ai_chooses_square(2)
-        allow(game_ui).to receive(:gets).and_return("3")
-        game_ui.player_chooses_square
-        game_ui.ai_chooses_square(7)
-        allow(game_ui).to receive(:gets).and_return("5")
-        game_ui.player_chooses_square
-        game_ui.ai_chooses_square(6)
-        allow(game_ui).to receive(:gets).and_return("4")
-        game_ui.player_chooses_square
-        game_ui.ai_chooses_square(9)
-        allow(game_ui).to receive(:gets).and_return("8")
-        expect{ game_ui.player_chooses_square}.to output(tie_grid).to_stdout
+    allow(game_ui).to receive(:gets).and_return("1")
+    game_ui.player_chooses_square
+
+    game_ui.ai_chooses_square(2)
+
+    allow(game_ui).to receive(:gets).and_return("3")
+    game_ui.player_chooses_square
+
+    game_ui.ai_chooses_square(7)
+
+    allow(game_ui).to receive(:gets).and_return("5")
+    game_ui.player_chooses_square
+
+    game_ui.ai_chooses_square(6)
+
+    allow(game_ui).to receive(:gets).and_return("4")
+    game_ui.player_chooses_square
+
+    game_ui.ai_chooses_square(9)
+
+    allow(game_ui).to receive(:gets).and_return("8")
+
+    expect{ game_ui.player_chooses_square}.to output(tie_grid).to_stdout
   end
 
 end
@@ -112,15 +118,14 @@ describe Game_screen do
   game_ui = described_class.new
 
   it 'AI wins a game' do
-    winning_grid =
-%Q(
- X | X | O 
------------
- X | O | O 
------------
-   | X | O 
-Game over, AI wins!
-)
+    winning_grid = 
+      " X | X | O \n" +
+      "-----------\n" +
+      " X | O | O \n" +
+      "-----------\n" +
+      "   | X | O \n" +
+      "Game over, AI wins!"
+
     allow(game_ui).to receive(:gets).and_return("1")
     game_ui.player_chooses_square
     game_ui.ai_chooses_square(5)
@@ -135,6 +140,3 @@ Game over, AI wins!
     expect{ game_ui.ai_chooses_square(9)}.to output(winning_grid).to_stdout
   end
 end
-
-# "Please enter the square you would like to use!\n\n X | O | X \n-----------\n O | X | O \n-----------\n X | X | O \nGame over, nobody wins!\n"
-# "Please enter the square you would like to use!\n\n X | O | X \n-----------\n O | X | O \n-----------\n X | X | O \nGame over, Player wins!\n"
