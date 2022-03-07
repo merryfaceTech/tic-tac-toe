@@ -31,12 +31,8 @@ describe Ai do
 
         result = ai.ai_chooses_box(testing_grid)
 
-        stop_win_grid = [
-            ["X", "X", "O"],
-            [" ", "O", " "],
-            [" ", " ", " "],
-          ]
+        stop_win_move = 3
     
-        expect(result).to eq(stop_win_grid)
+        expect(result).to eq(stop_win_move)
       end
 end
