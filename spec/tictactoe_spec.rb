@@ -7,6 +7,7 @@ describe Tictactoe do
 
   player_wins = "Game over, Player wins!"
   ai_wins = "Game over, AI wins!"
+  draw = "Game over, nobody wins!"
 
 # Test 1
   it "start new game with an empty board in the beginning of the game" do
@@ -138,5 +139,23 @@ describe Tictactoe do
       @tictactoe.play_hand(7, "X")
       message = @tictactoe.message("X")
       expect(message).to eq(player_wins)
+    end
+
+    # Test 14
+    it "Determines that player won" do
+      result = @tictactoe.who_won(player_wins)
+      expect(result).to eq("player")
+    end
+
+    # Test 15
+    it "Determines that ai won" do
+      result = @tictactoe.who_won(ai_wins)
+      expect(result).to eq("ai")
+    end
+    
+    # Test 16
+    it "Determines that it's a draw" do
+      result = @tictactoe.who_won(ai_wins)
+      expect(result).to eq("draw")
     end
 end
