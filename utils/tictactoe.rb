@@ -108,6 +108,18 @@ class Tictactoe
     end
   end
 
+  def who_won(message)
+    if message == "Game over, Player wins!"
+      return "player"
+    elsif message == "Game over, AI wins!"
+      return "ai"
+    elsif message == "Game over, nobody wins!"
+      return "draw"
+    else
+      return "ongoing"
+    end
+  end
+
   def get_rows
     @rows
   end

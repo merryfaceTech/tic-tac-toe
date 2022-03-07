@@ -155,7 +155,15 @@ describe Tictactoe do
     
     # Test 16
     it "Determines that it's a draw" do
-      result = @tictactoe.who_won(ai_wins)
+      result = @tictactoe.who_won(draw)
       expect(result).to eq("draw")
+    end    
+    
+    # Test 17
+    it "Determines that game is ongoing" do
+      result = @tictactoe.who_won("It's your turn.")
+      result2 = @tictactoe.who_won("It's the AI's turn.")
+      expect(result).to eq("ongoing")
+      expect(result2).to eq("ongoing")
     end
 end

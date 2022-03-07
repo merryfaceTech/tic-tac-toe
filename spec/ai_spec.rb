@@ -52,4 +52,21 @@ describe Ai do
     
         expect(result).to eq(stop_win_move)
       end
+
+        # Test 4
+        it "Stops player from winning by blocking its path on columns" do
+            ai = Ai.new
+    
+            testing_grid = [
+                [" ", " ", " "],
+                ["X", "O", " "],
+                ["X", " ", " "],
+            ]
+    
+            result = ai.ai_chooses_box(testing_grid)
+    
+            stop_win_move = 1
+        
+            expect(result).to eq(stop_win_move)
+            end
 end
