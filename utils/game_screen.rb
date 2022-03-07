@@ -68,11 +68,4 @@ class Game_screen
     def get_boxes
         @boxes
     end
-
 end
-
-# expected
-# " X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \nIt's the AI's turn.\n"
-
-# actual
-# "\n X |   |   \n-----------\n   |   |   \n-----------\n   |   |   \nIt's the AI's turn.\n"

@@ -139,5 +139,4 @@ describe Tictactoe do
       message = @tictactoe.message("X")
       expect(message).to eq(player_wins)
     end
-
 end
