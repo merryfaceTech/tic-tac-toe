@@ -1,5 +1,6 @@
 
 require './utils/ai'
+require './utils/tictactoe'
 
 describe Ai do
     # Test 1
@@ -54,18 +55,20 @@ describe Ai do
       end
 
       # Test 4
-      it "Minimax determines a winning move" do
+      it "Minimax determines if a game is ongoing or someone has won" do
           ai = Ai.new
 
           testing_grid = [
               ["O", " ", "X"],
               ["X", "O", " "],
-              ["X", " ", " "],
+              ["X", " ", "O"],
           ]
 
-          result = ai.minimax(testing_grid)
-
-          expect(result).to eq(1)
+          result = ai.minimax("ongoing")
+          expect(result).to eq(0)
+          expect(ai.minimax("draw")).to eq(0)
+          expect(ai.minimax("player")).to eq(-1)
+          expect(ai.minimax("ai")).to eq(1)
       end      
       
 end

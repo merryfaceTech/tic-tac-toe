@@ -2,7 +2,6 @@ require_relative './Tictactoe'
 
 class Ai
     def get_free_squares(grid)
-
       free_squares = []
 
       grid.each_with_index do |row, row_index|
@@ -40,6 +39,12 @@ class Ai
               return 9 if row[0] == "X" && row[1] == "X" && row[2] == " "
             end
         end
-
     end
+
+    def minimax(who_won_result)
+      return 1 if who_won_result == "ai"
+      return -1 if who_won_result == "player"
+      return 0 if who_won_result == "draw" || who_won_result == "ongoing"
+    end
+
 end
