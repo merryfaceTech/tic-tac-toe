@@ -20,7 +20,7 @@ describe Ai do
     end
 
     # Test 2
-    it "Stops player from winning by blocking its path on first row" do
+    it "Stops player from winning by blocking its path on rows" do
         ai = Ai.new
 
         testing_grid = [
@@ -32,6 +32,23 @@ describe Ai do
         result = ai.ai_chooses_box(testing_grid)
 
         stop_win_move = 3
+    
+        expect(result).to eq(stop_win_move)
+      end
+
+      # Test 3
+      it "Stops player from winning by blocking its path on columns" do
+        ai = Ai.new
+
+        testing_grid = [
+          [" ", " ", " "],
+          ["X", "O", " "],
+          ["X", " ", " "],
+        ]
+
+        result = ai.ai_chooses_box(testing_grid)
+
+        stop_win_move = 1
     
         expect(result).to eq(stop_win_move)
       end
