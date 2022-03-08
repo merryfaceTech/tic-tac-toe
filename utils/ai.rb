@@ -41,10 +41,70 @@ class Ai
         end
     end
 
-    def minimax(who_won_result)
-      return 1 if who_won_result == "ai"
-      return -1 if who_won_result == "player"
-      return 0 if who_won_result == "draw" || who_won_result == "ongoing"
+    def check_who_won(grid, symbol)
+      winning_moves = [
+        [[0,0], [0,1], [0,2]],
+        [[1,0], [1,1], [1,2]],
+        [[2,0], [2,1], [2,2]],
+        [[0,0], [1,0], [2,0]],
+        [[0,1], [1,1], [2,1]],
+        [[0,2], [1,2], [2,2]],
+        [[0,0], [1,1], [2,2]],
+        [[0,2], [1,1], [2,0]],
+      ]
+
+      winning_moves.each do |move|
+        if
+        grid[move[0][0]][move[0][1]] == grid[move[1][0]][move[1][1]] && 
+        grid[move[1][0]][move[1][1]] == grid[move[2][0]][move[2][1]] && 
+        grid[move[1][0]][move[1][1]] == symbol
+          return :win
+        elsif
+          grid[move[0][0]][move[0][1]] == grid[move[1][0]][move[1][1]] && 
+          grid[move[1][0]][move[1][1]] == grid[move[2][0]][move[2][1]] && 
+          grid[move[1][0]][move[1][1]] != symbol &&
+          grid[move[1][0]][move[1][1]] != " "
+          return :lose
+        end
+      end
+
+      return :draw if get_free_squares(grid) == []
     end
 
+    def minimax(grid, is_maximizing)
+        return 1 if who_won_result == "ai"
+        return -1 if who_won_result == "player"
+        return 0 if who_won_result == "draw" || who_won_result == "ongoing"
+
+        if is_maximizing
+            best_score = -infinity
+
+            get_free_squares(grid).each do |square|
+              
+                if square <= 3
+                  grid[0][square - 1] = "O"
+                elsif square > 3 && square <= 6
+                  grid[1][square - 4] = "O"
+                else
+                  grid[2][square - 7] = "O"
+                end
+
+                score = minimax(grid, False)
+                
+                if square <= 3
+                  grid[0][square - 1] = " "
+                elsif square > 3 && square <= 6
+                  grid[1][square - 4] = " "
+                else
+                  grid[2][square - 7] = " "
+                end
+                
+                if score > best_score
+                  best_score = score
+                end
+            end
+        end
+
+        return best_score
+    end
 end
