@@ -101,8 +101,8 @@ describe Ai do
     ]
 
     expected_score = 1
-    # result = ai.minimax(testing_grid, true)
-    expect(1).to eq(expected_score)
+    result = ai.minimax(testing_grid, true)
+    expect(result).to eq(expected_score)
   end
 
   # CHECK_WHO_WON Test 1 

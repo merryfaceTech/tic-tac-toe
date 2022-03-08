@@ -72,9 +72,9 @@ class Ai
     end
 
     def minimax(grid, is_maximizing)
-        return 1 if who_won_result == "ai"
-        return -1 if who_won_result == "player"
-        return 0 if who_won_result == "draw" || who_won_result == "ongoing"
+        return 1 if check_who_won(grid, "O") == :win
+        return -1 if check_who_won(grid, "X") == :lose
+        return 0 if check_who_won(grid, "O") == :draw
 
         if is_maximizing
             best_score = -infinity
