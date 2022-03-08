@@ -69,6 +69,23 @@ describe Ai do
           expect(ai.minimax("draw")).to eq(0)
           expect(ai.minimax("player")).to eq(-1)
           expect(ai.minimax("ai")).to eq(1)
-      end      
+      end
+      
+      # Test 5
+      it "Minimax will choose the move to stop it from losing (diagonal)" do
+        ai = Ai.new
+
+        testing_grid = [
+            [" ", " ", " "],
+            ["O", "X", " "],
+            ["X", " ", " "],
+        ]
+
+        result = ai.ai_chooses_box(testing_grid)
+
+        stop_win_move = 3
+    
+        expect(result).to eq(stop_win_move)
+    end  
       
 end
