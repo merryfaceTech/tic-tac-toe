@@ -77,17 +77,27 @@ describe Ai do
   it "Minimax determines if a game is ongoing or someone has won" do
     ai = Ai.new
 
-    testing_grid = [
+    testing_grid_draw = [
+        ["O", "X", "X"],
+        ["X", "X", "O"],
+        ["O", "O", "X"],
+    ]
+
+    testing_grid_player_wins = [
+      ["O", " ", "X"],
+      ["X", "X", " "],
+      ["X", " ", "O"],
+    ] 
+      
+      testing_grid_ai_wins = [
         ["O", " ", "X"],
         ["X", "O", " "],
         ["X", " ", "O"],
     ]
 
-    result = ai.minimax("ongoing")
-    expect(result).to eq(0)
-    expect(ai.minimax("draw")).to eq(0)
-    expect(ai.minimax("player")).to eq(-1)
-    expect(ai.minimax("ai")).to eq(1)
+    expect(ai.minimax(testing_grid_draw)).to eq(0)
+    expect(ai.minimax(testing_grid_player_wins)).to eq(-1)
+    expect(ai.minimax(testing_grid_ai_wins)).to eq(1)
   end
 
   # MINIMAX Test 2
@@ -101,7 +111,7 @@ describe Ai do
     ]
 
     expected_score = 1
-    result = ai.minimax(testing_grid, true)
+    result = ai.minimax(testing_grid)
     expect(result).to eq(expected_score)
   end
 

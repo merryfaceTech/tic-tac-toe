@@ -71,40 +71,87 @@ class Ai
       return :draw if get_free_squares(grid) == []
     end
 
-    def minimax(grid, is_maximizing)
+    def set_box(grid, selected_box, symbol)
+      if selected_box <= 3
+        grid[0][selected_box - 1] = symbol
+      elsif selected_box > 3 && selected_box <= 6
+        grid[1][selected_box - 4] = symbol
+      else
+        grid[2][selected_box - 7] = symbol
+      end
+
+      grid
+    end
+
+    def minimax(grid)
         return 1 if check_who_won(grid, "O") == :win
         return -1 if check_who_won(grid, "X") == :lose
         return 0 if check_who_won(grid, "O") == :draw
 
-        if is_maximizing
-            best_score = -infinity
+        scores = [[-1]]
+        current_player_is_ai = true
 
-            get_free_squares(grid).each do |square|
-              
-                if square <= 3
-                  grid[0][square - 1] = "O"
-                elsif square > 3 && square <= 6
-                  grid[1][square - 4] = "O"
-                else
-                  grid[2][square - 7] = "O"
-                end
-
-                score = minimax(grid, False)
-                
-                if square <= 3
-                  grid[0][square - 1] = " "
-                elsif square > 3 && square <= 6
-                  grid[1][square - 4] = " "
-                else
-                  grid[2][square - 7] = " "
-                end
-                
-                if score > best_score
-                  best_score = score
-                end
-            end
+        get_free_squares(grid).each do |square|
+          possible_game = set_box(grid, square, current_player_is_ai ? "O" : "X")
+          score = minimax(possible_game)[0]
+          scores.append([score, square])
+          current_player_is_ai = !current_player_is_ai
         end
 
-        return best_score
+        return scores.max if current_player_is_ai
+        return scores.min if !current_player_is_ai
+        
+
+        # if is_maximizing
+        #     best_score = -1000
+        #     score = -1000
+
+        #         if square <= 3
+        #           grid[0][square - 1] = "O"
+        #         elsif square > 3 && square <= 6
+        #           grid[1][square - 4] = "O"
+        #         else
+        #           grid[2][square - 7] = "O"
+        #         end
+
+        #         score = minimax(grid, false)
+                
+        #         if square <= 3
+        #           grid[0][square - 1] = " "
+        #         elsif square > 3 && square <= 6
+        #           grid[1][square - 4] = " "
+        #         else
+        #           grid[2][square - 7] = " "
+        #         end
+                
+        #         best_score = score if score > best_score
+        #     end
+
+        # else
+        #     best_score = 1000
+        #     get_free_squares(grid).each do |square|
+        #       if square <= 3
+        #         grid[0][square - 1] = "X"
+        #       elsif square > 3 && square <= 6
+        #         grid[1][square - 4] = "X"
+        #       else
+        #         grid[2][square - 7] = "X"
+        #       end
+
+        #       score = minimax(grid, true)
+              
+        #       if square <= 3
+        #         grid[0][square - 1] = " "
+        #       elsif square > 3 && square <= 6
+        #         grid[1][square - 4] = " "
+        #       else
+        #         grid[2][square - 7] = " "
+        #       end
+              
+        #       best_score = score if score < best_score
+        #   end
+        # end
+
+        # return best_score
     end
 end
