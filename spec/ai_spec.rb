@@ -4,7 +4,7 @@ require './utils/tictactoe'
 
 describe Ai do
   # Test 1
-  xit "Retrieves all available squares" do
+  it "Retrieves all available squares" do
     ai = Ai.new
 
     testing_grid = [
@@ -21,7 +21,7 @@ describe Ai do
   end
 
   # Test 2
-  xit "Stops player from winning by blocking its path on rows" do
+  it "Stops player from winning by blocking its path on rows" do
     ai = Ai.new
 
     testing_grid = [
@@ -38,7 +38,7 @@ describe Ai do
   end
 
   # Test 3
-  xit "Stops player from winning by blocking its path on columns" do
+  it "Stops player from winning by blocking its path on columns" do
     ai = Ai.new
 
     testing_grid = [
@@ -55,7 +55,7 @@ describe Ai do
   end
     
   # Test 4
-  xit "Minimax will choose the move to stop it from losing (diagonal)" do
+  it "Minimax will choose the move to stop it from losing (diagonal)" do
     ai = Ai.new
 
     testing_grid = [
@@ -70,6 +70,40 @@ describe Ai do
 
     expect(result).to eq(stop_win_move)
   end
+
+  # Test 5
+  it "Only one box left" do
+    ai = Ai.new
+
+    testing_grid = [
+        [" ", "O", "O"],
+        ["O", "X", "X"],
+        ["X", "X", "O"],
+    ]
+
+    result = ai.ai_chooses_box(testing_grid)
+
+    win_move = 1
+
+    expect(result).to eq(win_move)
+  end
+
+    # Test 6
+    it "Only two boxes left, it's the AI's turn" do
+      ai = Ai.new
+  
+      testing_grid = [
+          [" ", "O", " "],
+          ["O", "X", "X"],
+          ["X", "X", "O"],
+      ]
+  
+      result = ai.ai_chooses_box(testing_grid)
+  
+      next_move = 3
+  
+      expect(result).to eq(next_move)
+    end
 
   #  ==== UNIT TESTS =====
 
@@ -161,4 +195,6 @@ describe Ai do
     expect(ai.check_who_won(testing_grids[3], "O")).to eq(:draw)
     expect(ai.check_who_won(testing_grids[3], "X")).to eq(:draw)
   end
+
+  
 end

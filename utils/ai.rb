@@ -19,26 +19,8 @@ class Ai
     end
 
     def ai_chooses_box(grid)
-        # === Stop player from winning via rows ===
-        grid.each_with_index do |row, index|
-            if index == 0
-              return 1 if row[1] == "X" && row[2] == "X" && row[0] == " "
-              return 2 if row[0] == "X" && row[2] == "X" && row[1] == " "
-              return 3 if row[0] == "X" && row[1] == "X" && row[2] == " "
-            end
-
-            if index == 1
-              return 4 if row[1] == "X" && row[2] == "X" && row[0] == " "
-              return 5 if row[0] == "X" && row[2] == "X" && row[1] == " "
-              return 6 if row[0] == "X" && row[1] == "X" && row[2] == " "
-            end
-
-            if index == 2
-              return 7 if row[1] == "X" && row[2] == "X" && row[0] == " "
-              return 8 if row[0] == "X" && row[2] == "X" && row[1] == " "
-              return 9 if row[0] == "X" && row[1] == "X" && row[2] == " "
-            end
-        end
+      intelligent_move = minimax(grid)
+      return intelligent_move[1]
     end
 
     def check_who_won(grid, symbol)
@@ -91,6 +73,7 @@ class Ai
         get_free_squares(grid).each do |square|
             possible_game = set_box(grid, square, current_player_is_ai ? "O" : "X")
             score = minimax(possible_game, scores, !current_player_is_ai)
+            pp grid
             if !score.nil?
                 scores << [score[0], square]
             else
