@@ -123,5 +123,9 @@ class Tictactoe
   def get_rows
     @rows
   end
+
+  def get_moves_played
+    @moves_played
+  end
 end
 

@@ -35,12 +35,23 @@ class Game_screen
     end
 
     def player_chooses_square
+        choosing = true
         choice = gets.chomp.to_i
-        @Tic.play_hand(choice, "X")
-        @boxes = @Tic.get_rows     
-        update_grid()
-        print_grid()
-        puts @Tic.message("X")
+
+        while choosing do
+            if @Tic.get_rows.flatten[choice - 1] == " "
+                @Tic.play_hand(choice, "X")
+                @boxes = @Tic.get_rows     
+                update_grid()
+                print_grid()
+                puts @Tic.message("X")
+                choosing = false
+            else
+                puts "Box is taken! Try again:"
+                player_chooses_square()
+                break
+            end
+        end
     end
 
     def ai_chooses_square(selected_square)
@@ -67,5 +78,9 @@ class Game_screen
 
     def get_boxes
         @boxes
+    end
+
+    def get_tic
+        @Tic
     end
 end
