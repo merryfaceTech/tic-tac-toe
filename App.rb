@@ -13,9 +13,12 @@ def run
 
   while !game.get_tic.game_ended do
     game.player_chooses_square
-    puts "AI is choosing..." if !get_tic.game_ended
-    sleep(1)
-    game.ai_chooses_square(ai.ai_chooses_box(ai.ai_chooses_box(game.get_grid)))
+
+    if !game.get_tic.game_ended
+      puts "AI is choosing..." 
+      sleep(1)
+      game.ai_chooses_square(ai.ai_chooses_box(game.get_rows))
+    end
   end
 end
 

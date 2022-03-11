@@ -5,7 +5,6 @@ class Ai
       free_squares = []
 
       grid.each_with_index do |row, row_index|
-
           row.each_with_index do |column, column_index|
               if column == " "
                   free_squares.append(column_index + 1) if row_index == 0
@@ -19,8 +18,8 @@ class Ai
     end
 
     def ai_chooses_box(grid)
-      intelligent_move = minimax(grid)
-      return intelligent_move[1]
+      # minimax(grid)[1]
+      get_free_squares(grid).sample(1)[0]
     end
 
     def check_who_won(grid, symbol)
