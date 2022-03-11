@@ -1,15 +1,41 @@
 class Tictactoe
   def initialize
-    @score_board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
+    @row1=[" ", " ", " "]
+    @row2=[" ", " ", " "]
+    @row3=[" ", " ", " "]
+    @rows = [
+      @row1,
+      @row2,
+      @row3
+    ]
+    @moves_played = 0
+    turn_message = ""
   end
 
   def start_new_game
-    @score_board = [" ", " ", " ", " ", " ", " ", " ", " ", " "]
-    @score_board
+    @row1=[" ", " ", " "]
+    @row2=[" ", " ", " "]
+    @row3=[" ", " ", " "]
+    @rows = [
+      @row1,
+      @row2,
+      @row3
+    ]
+    @moves_played = 0
+    @rows
   end
 
-  def set_square(selected_square, symbol)
-    @score_board[selected_square - 1] = symbol
+  def set_box(selected_box, symbol)
+    if selected_box <= 3
+      @row1[selected_box - 1] = symbol
+      @rows[0] = @row1
+    elsif selected_box > 3 && selected_box <= 6
+      @row2[selected_box - 4] = symbol
+      @rows[1] = @row2
+    else
+      @row3[selected_box - 7] = symbol
+      @rows[2] = @row3
+    end
   end
 
   def column_checker
@@ -32,31 +58,66 @@ class Tictactoe
       end
     end
   end
-  
-  def game_end_checker(is_player)
-    player = is_player ? "X" : "O"
-    endgame_message = is_player ? "Game over, Player wins!" : "Game over, AI wins!"
-    win_by_row1 = (@score_board[0] == player) && (@score_board[1] == player) && (@score_board[2] == player)
-    win_by_row2 = (@score_board[3] == player) && (@score_board[4] == player) && (@score_board[5] == player)
-    win_by_row3 = (@score_board[6] == player) && (@score_board[7] == player) && (@score_board[8] == player)
+
+  def row_checker()
+    row1_is_not_empty = @row1[0] == "X" || @row1[0] == "O"
+    row2_is_not_empty = @row2[0] == "X" || @row2[0] == "O" 
+    row3_is_not_empty = @row3[0] == "X" || @row3[0] == "O"
+    row1_win = @row1[0] == @row1[1] && @row1[1] == @row1[2] && row1_is_not_empty
+    row2_win = @row2[0] == @row2[1] && @row2[1] == @row2[2] && row2_is_not_empty
+    row3_win = @row3[0] == @row3[1] && @row3[1] == @row3[2] && row3_is_not_empty
+    row1_win || row2_win || row3_win
+  end
+
+  def game_ended
+    win_by_row = row_checker()
     win_by_column = column_checker()
     win_by_diagonal = diagonal_checker()
+    all_moves_played = @moves_played == 9
+    
+    win_by_row || win_by_column || win_by_diagonal || all_moves_played
+  end
 
-    if win_by_row1 || win_by_row2 || win_by_row3 || win_by_column || win_by_diagonal
-      endgame_message
-    else
-      @score_board
+  def game_over(is_player)
+    is_player ? "Game over, Player wins!" : "Game over, AI wins!"
+  end
+
+  def game_draw
+    if !@rows.flatten.include?(" ")
+      "Game over, nobody wins!"
     end
   end
 
-  def player_adds_cross(selected_square)
-    set_square(selected_square, "X")
-    game_end_checker(true)
+  def play_hand(selected_box, symbol)
+    set_box(selected_box, symbol)
+    @moves_played += 1
+  end
+  
+  def message(symbol)
+    is_player = symbol == "X"
+    if game_ended()
+      if row_checker() || column_checker() || diagonal_checker()
+        return game_over(is_player)
+      end
+  
+      if @moves_played == 9
+        return game_draw()
+      end
+    else
+      return @turn_message = is_player ? "It's the AI's turn." : "It's your turn."
+    end
   end
 
-  def ai_adds_naught(selected_square)
-    set_square(selected_square, "O")
-    game_end_checker(false)
+  def who_won(message)
+    if message == "Game over, Player wins!"
+      return "player"
+    elsif message == "Game over, AI wins!"
+      return "ai"
+    elsif message == "Game over, nobody wins!"
+      return "draw"
+    else
+      return "ongoing"
+    end
   end
 
   def unbeatable_ai(selected_square)
@@ -68,3 +129,4 @@ class Tictactoe
     @score_board
   end
 end
+

@@ -7,6 +7,7 @@ describe Tictactoe do
 
   player_wins = "Game over, Player wins!"
   ai_wins = "Game over, AI wins!"
+  draw = "Game over, nobody wins!"
 
 # Test 1
   it "start new game with an empty board in the beginning of the game" do
@@ -16,92 +17,149 @@ describe Tictactoe do
 
 # Test 2
   it "starts a new game and player adds X to top left corner" do
-    result = @tictactoe.player_adds_cross(1)
-    expect(result).to eq(["X", " ", " ", " ", " ", " ", " ", " ", " "])
+    @tictactoe.play_hand(1, "X")
+    message = @tictactoe.message("X")
+    expect(message).to eq("It's the AI's turn.")
+    expect(@tictactoe.get_rows).to eq([
+      ["X", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 3
   it "starts a new game and ai adds naught to top left corner" do
-    result = @tictactoe.ai_adds_naught(1)
-    expect(result).to eq(["O", " ", " ", " ", " ", " ", " ", " ", " "])
+    @tictactoe.play_hand(1, "O")
+    message = @tictactoe.message("O")
+    expect(message).to eq("It's your turn.")
+    expect(@tictactoe.get_rows).to eq([
+      ["O", " ", " "],
+      [" ", " ", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 4
   it "Player wins by drawing 3 crosses in top row" do
-    @tictactoe.player_adds_cross(1)
-    @tictactoe.player_adds_cross(2)
-    result = @tictactoe.player_adds_cross(3)
-    expect(result).to eq(player_wins)
+    @tictactoe.play_hand(1, "X")
+    @tictactoe.play_hand(2, "X")
+    @tictactoe.play_hand(3, "X")
+    message = @tictactoe.message("X")
+    expect(message).to eq(player_wins)
   end
 
   # Test 5
-  it "Player wins by drawing 3 naughts in top row" do
-    @tictactoe.ai_adds_naught(1)
-    @tictactoe.ai_adds_naught(2)
-    result = @tictactoe.ai_adds_naught(3)
-    expect(result).to eq(ai_wins)
+  it "AI wins by drawing 3 naughts in top row" do
+    @tictactoe.play_hand(1, "O")
+    @tictactoe.play_hand(2, "O")
+    @tictactoe.play_hand(3, "O")
+    message = @tictactoe.message("O")
+    expect(message).to eq(ai_wins)
   end
 
   # Test 6
   it "Both players add to the grid XOX" do
-    @tictactoe.player_adds_cross(1)
-    @tictactoe.ai_adds_naught(2)
-    result = @tictactoe.player_adds_cross(3)
-    expect(result).to eq(["X", "O", "X", " ", " ", " ", " ", " ", " "])
+    @tictactoe.play_hand(1, "X")
+    @tictactoe.play_hand(2, "O")
+    @tictactoe.play_hand(3, "X")
+    message = @tictactoe.message("X")
+    expect(message).to eq("It's the AI's turn.")
+    expect(@tictactoe.get_rows).to eq([
+      ["X", "O", "X"],
+      [" ", " ", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 7
   it "starts a new game and player adds X to the middle square" do
-    result = @tictactoe.player_adds_cross(5)
-    expect(result).to eq([" ", " ", " ", " ", "X", " ", " ", " ", " "])
+    @tictactoe.play_hand(5, "X")
+    message = @tictactoe.message("X")
+    expect(message).to eq("It's the AI's turn.")
+    expect(@tictactoe.get_rows).to eq([
+      [" ", " ", " "],
+      [" ", "X", " "],
+      [" ", " ", " "]
+    ])
   end
 
   # Test 8
   it "AI wins by drawing 3 naughts in last row" do
-    @tictactoe.ai_adds_naught(7)
-    @tictactoe.ai_adds_naught(8)
-    result = @tictactoe.ai_adds_naught(9)
-    expect(result).to eq(ai_wins)
+    @tictactoe.play_hand(7, "O")
+    @tictactoe.play_hand(8, "O")
+    @tictactoe.play_hand(9, "O")
+    message = @tictactoe.message("O")
+    expect(message).to eq(ai_wins)
   end
 
   # Test 9
   it "Player wins by drawing 3 crosses in the left column" do
-    @tictactoe.player_adds_cross(1)
-    @tictactoe.player_adds_cross(4)
-    result = @tictactoe.player_adds_cross(7)
-    expect(result).to eq(player_wins)
+    @tictactoe.play_hand(1, "X")
+    @tictactoe.play_hand(4, "X")
+    result = @tictactoe.play_hand(7, "X")
+    message = @tictactoe.message("X")
+    expect(message).to eq(player_wins)
   end
 
     # Test 10
     it "AI wins by drawing 3 naughts in the middle column" do
-      @tictactoe.ai_adds_naught(2)
-      @tictactoe.ai_adds_naught(5)
-      result = @tictactoe.ai_adds_naught(8)
-      expect(result).to eq(ai_wins)
+      @tictactoe.play_hand(2, "O")
+      @tictactoe.play_hand(5, "O")
+      @tictactoe.play_hand(8, "O")
+      message = @tictactoe.message("O")
+      expect(message).to eq(ai_wins)
     end
 
     # Test 11
     it "AI wins by drawing 3 naughts in the last column" do
-      @tictactoe.ai_adds_naught(3)
-      @tictactoe.ai_adds_naught(6)
-      result = @tictactoe.ai_adds_naught(9)
-      expect(result).to eq(ai_wins)
+      @tictactoe.play_hand(3, "O")
+      @tictactoe.play_hand(6, "O")
+      @tictactoe.play_hand(9, "O")
+      message = @tictactoe.message("O")
+      expect(message).to eq(ai_wins)
     end
 
     # Test 12
     it "AI wins by drawing 3 naughts left-to-right diagonally" do
-      @tictactoe.ai_adds_naught(1)
-      @tictactoe.ai_adds_naught(5)
-      result = @tictactoe.ai_adds_naught(9)
-      expect(result).to eq(ai_wins)
+      @tictactoe.play_hand(1, "O")
+      @tictactoe.play_hand(5, "O")
+      @tictactoe.play_hand(9, "O")
+      message = @tictactoe.message("O")
+      expect(message).to eq(ai_wins)
     end
 
     # Test 13
     it "Player wins by drawing 3 crosses right-to-left diagonally" do
-      @tictactoe.player_adds_cross(3)
-      @tictactoe.player_adds_cross(5)
-      result = @tictactoe.player_adds_cross(7)
-      expect(result).to eq(player_wins)
+      @tictactoe.play_hand(3, "X")
+      @tictactoe.play_hand(5, "X")
+      @tictactoe.play_hand(7, "X")
+      message = @tictactoe.message("X")
+      expect(message).to eq(player_wins)
     end
 
+    # Test 14
+    it "Determines that player won" do
+      result = @tictactoe.who_won(player_wins)
+      expect(result).to eq("player")
+    end
+
+    # Test 15
+    it "Determines that ai won" do
+      result = @tictactoe.who_won(ai_wins)
+      expect(result).to eq("ai")
+    end
+    
+    # Test 16
+    it "Determines that it's a draw" do
+      result = @tictactoe.who_won(draw)
+      expect(result).to eq("draw")
+    end    
+    
+    # Test 17
+    it "Determines that game is ongoing" do
+      result = @tictactoe.who_won("It's your turn.")
+      result2 = @tictactoe.who_won("It's the AI's turn.")
+      expect(result).to eq("ongoing")
+      expect(result2).to eq("ongoing")
+    end
 end
