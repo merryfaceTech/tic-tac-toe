@@ -19,7 +19,6 @@ class Ai
 
   def ai_chooses_box(grid)
     minimax(grid)[1]
-    # get_free_squares(grid).sample(1)[0]
   end
 
   def check_who_won(grid, symbol)
@@ -79,10 +78,6 @@ class Ai
       set_box(grid, square, " ")
     end
 
-    # pp scores.max.to_s + "||" + scores.min.to_s
-    # pp scores
-    # return scores.max if current_player_is_ai
-    # return scores.min if !current_player_is_ai
     scores.max
   end
 end
