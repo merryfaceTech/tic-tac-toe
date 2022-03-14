@@ -5,11 +5,11 @@ class Ai
     free_squares = []
 
     grid.each_with_index do |row, row_index|
-      row.each_with_index do |column, column_index|
-        if column == " "
-          free_squares << column_index + 1 if row_index == 0
-          free_squares << column_index + 4 if row_index == 1
-          free_squares << column_index + 7 if row_index == 2
+      row.each_with_index do |square, square_index|
+        if square == " "
+          free_squares << square_index + 1 if row_index == 0
+          free_squares << square_index + 4 if row_index == 1
+          free_squares << square_index + 7 if row_index == 2
         end
       end
     end
@@ -18,7 +18,7 @@ class Ai
   end
 
   def ai_chooses_box(grid)
-    # minimax(grid)[1]
+    # puts minimax(grid)[1]
     get_free_squares(grid).sample(1)[0]
   end
 
@@ -74,14 +74,12 @@ class Ai
       score = -1
 
       if minimax(possible_game, scores, !current_player_is_ai) != nil
-        score = minimax(possible_game, scores, !current_player_is_ai)[0]
+        score = minimax(possible_game, scores, !current_player_is_ai)
       end
 
-      scores << [score, square]
+      scores << [score[0], square]
       break if score == 1
     end
-
-    pp scores
 
     return scores.max if current_player_is_ai
     return scores.min if !current_player_is_ai

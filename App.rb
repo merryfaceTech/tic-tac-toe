@@ -2,10 +2,6 @@ require "./utils/game_screen"
 require "./utils/ai"
 
 
-def start_the_game(game)
-  game.initiate_game
-end
-
 def run
   game = Game_screen.new
   ai = Ai.new
@@ -17,9 +13,17 @@ def run
     if !game.get_tic.game_ended
       puts "AI is choosing..." 
       sleep(1)
-      game.ai_chooses_square(ai.ai_chooses_box(game.get_rows))
+      set_ai_choice(game, ai)
     end
   end
+end
+
+def start_the_game(game)
+  game.initiate_game
+end
+
+def set_ai_choice(game, ai)
+  game.ai_chooses_square(ai.ai_chooses_box(game.get_rows))
 end
 
 run()
