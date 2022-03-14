@@ -189,4 +189,17 @@ describe Ai do
     method = ai.minimax(testing_grid)
     expect(method).to eq(result)
   end
+
+  it 'last move choose win instead of lose' do
+    ai = Ai.new
+    testing_grid = [
+      ["O", "O", " "],
+      ["X", "X", " "],
+      ["X", " ", "O"],
+    ]
+
+    result = [1, 3]
+    method = ai.minimax(testing_grid)
+    expect(method).to eq(result)
+  end
 end
