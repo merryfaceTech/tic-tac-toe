@@ -54,23 +54,6 @@ describe Ai do
     expect(result).to eq(stop_win_move)
   end
     
-  # Test 4
-  it "Minimax will choose the move to stop it from losing (diagonal)" do
-    ai = Ai.new
-
-    testing_grid = [
-        [" ", " ", " "],
-        ["O", "X", " "],
-        ["X", " ", " "],
-    ]
-
-    result = ai.ai_chooses_box(testing_grid)
-
-    stop_win_move = 3
-
-    expect(result).to eq(stop_win_move)
-  end
-
   # Test 5
   it "Only one box left" do
     ai = Ai.new
@@ -105,63 +88,7 @@ describe Ai do
       expect(result).to eq(next_move)
     end
 
-  #  ==== UNIT TESTS =====
-
-  # MINIMAX Test 1
-  it "returns a draw score" do
-    ai = Ai.new
-
-    testing_grid_draw = [
-        ["O", "X", "X"],
-        ["X", "X", " "],
-        ["O", "O", "X"],
-    ]
-
-    expect(ai.minimax(testing_grid_draw)[0]).to eq(0)
-  end
-
-    it 'returns a lose score' do
-    ai = Ai.new
-
-      testing_grid_player_wins = [
-        ["O", "X", "O"],
-        ["X", "X", " "],
-        ["X", "O", "O"],
-      ] 
-
-    result = ai.minimax(testing_grid_player_wins, [], false)
-    expect(result[0]).to eq(-1)
-  end
-
-  it 'returns a win score' do
-    ai = Ai.new
-
-    testing_grid_ai_wins = [
-      ["O", "O", "X"],
-      ["X", " ", "X"],
-      ["X", "X", "O"],
-    ]
-
-    expect(ai.minimax(testing_grid_ai_wins)[0]).to eq(1)
-  end
-  
-  # MINIMAX Test 2
-  it 'has minimax return best score for AI to win' do
-    ai = Ai.new
-
-    testing_grid = [
-        ["X", "O", "O"],
-        ["X", "X", " "],
-        [" ", "X", "O"],
-    ]
-
-    expected_score = 1
-    result = ai.minimax(testing_grid)[0]
-    expect(result).to eq(expected_score)
-  end
-  
-
-  # CHECK_WHO_WON Test 1 
+    # CHECK_WHO_WON Test 1 
   it 'check that the selected symbol won' do
     ai = Ai.new
 
@@ -196,5 +123,70 @@ describe Ai do
     expect(ai.check_who_won(testing_grids[3], "X")).to eq(:draw)
   end
 
+  # ==== MINIMAX ====
+
+  it 'detects that it already won, sly old dog' do
+    ai = Ai.new
+    testing_grid = [
+      ["O", " ", "O"],
+      ["O", "X", "X"],
+      ["O", "X", "X"],
+    ]
+
+    result = [1]
+    method = ai.minimax(testing_grid)
+    expect(method).to eq(result)
+  end
+
+  it 'detects that it\'s a draw' do
+    ai = Ai.new
+    testing_grid = [
+      ["O", "X", "O"],
+      ["X", "X", "O"],
+      ["X", "O", "X"],
+    ]
+
+    result = [0]
+    method = ai.minimax(testing_grid)
+    expect(method).to eq(result)
+  end
+
+  it 'detects that it already lost, poor old dog' do
+    ai = Ai.new
+    testing_grid = [
+      ["X", " ", "O"],
+      ["O", "X", "X"],
+      ["O", "O", "X"],
+    ]
+
+    result = [-1]
+    method = ai.minimax(testing_grid)
+    expect(method).to eq(result)
+  end
+
+  it 'blocks player from winning' do
+    ai = Ai.new
+    testing_grid = [
+      ["O", " ", " "],
+      ["X", "O", "X"],
+      ["O", "X", "X"],
+    ]
+
+    result = [1, 3]
+    method = ai.minimax(testing_grid)
+    expect(method).to eq(result)
+  end
   
+  it 'blocks player and returns a drawing move' do
+    ai = Ai.new
+    testing_grid = [
+      ["O", " ", " "],
+      ["X", "X", "O"],
+      ["O", "X", "X"],
+    ]
+
+    result = [0, 2]
+    method = ai.minimax(testing_grid)
+    expect(method).to eq(result)
+  end
 end

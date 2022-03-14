@@ -18,8 +18,8 @@ class Ai
   end
 
   def ai_chooses_box(grid)
-    # puts minimax(grid)[1]
-    get_free_squares(grid).sample(1)[0]
+    minimax(grid)[1]
+    # get_free_squares(grid).sample(1)[0]
   end
 
   def check_who_won(grid, symbol)
@@ -65,23 +65,22 @@ class Ai
   end
 
   def minimax(grid, scores = [], current_player_is_ai = true)
-    return 1 if check_who_won(grid, "O") == :win
-    return -1 if check_who_won(grid, "X") == :lose
-    return 0 if check_who_won(grid, "O") == :draw
+    current_player = current_player_is_ai ? "O" : "X"
+    return [1] if check_who_won(grid, current_player) == :win
+    return [-1] if check_who_won(grid, current_player) == :lose
+    return [0] if check_who_won(grid, current_player) == :draw
 
     get_free_squares(grid).each do |square|
-      possible_game = set_box(grid, square, current_player_is_ai ? "O" : "X")
-      score = -1
+      possible_game = set_box(grid, square, current_player)
+      score = minimax(possible_game, scores, !current_player_is_ai)
 
-      if minimax(possible_game, scores, !current_player_is_ai) != nil
-        score = minimax(possible_game, scores, !current_player_is_ai)
-      end
-
-      scores << [score[0], square]
-      break if score == 1
+      scores << [-1*score[0], square]
+      set_box(grid, square, " ")
     end
 
-    return scores.max if current_player_is_ai
-    return scores.min if !current_player_is_ai
+    pp scores.max.to_s + "||" + scores.min.to_s
+    # return scores.max if current_player_is_ai
+    # return scores.min if !current_player_is_ai
+    scores.max
   end
 end
